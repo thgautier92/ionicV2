@@ -5,8 +5,9 @@ import {ListPage} from './pages/list/list';
 import {CardPage} from './pages/card/card';
 import {ActionSheetsPage} from './pages/actionSheets/actionSheets';
 import {SelectPage} from './pages/select/select';
-import {SlidesPage} from './pages/slides/slides';
+import * as slides from './pages/slides/slides';
 import * as toolbar from './pages/toolbar/toolbar';
+import * as inputs from './pages/inputs/inputs';
 
 
 @App({
@@ -32,9 +33,10 @@ class MyApp {
       { title: 'Card', component: CardPage, icon: 'card' },
       { title: 'Action Sheet', component: ActionSheetsPage, icon: 'magnet' },
       { title: 'Select', component: SelectPage, icon: 'ios-arrow-dropdown' },
-      { title: 'Slides', component: SlidesPage, icon: 'ios-arrow-dropdown' },
-       { title: 'ToolBar', component: toolbar, icon: 'ios-arrow-dropdown' }
-
+      { title: 'Slides', component: slides.SlidesPage, icon: 'albums' },
+      { title: 'ToolBar Search', component: toolbar.SearchbarPage, icon: 'search' },
+      { title: 'ToolBar Segment', component: toolbar.SegmentPage, icon: 'options' },
+      { title: 'Form Fixed', component: inputs.FixedInlinePage, icon: 'keypad' },
     ];
   }
 

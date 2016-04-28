@@ -1,4 +1,7 @@
 <ion-navbar *navbar hideBackButton class="show-navbar" [attr.danger]="isAndroid ? ''  : null">
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
   <ion-buttons start>
     <button danger showWhen="ios"><ion-icon name="create"></ion-icon></button>
     <button hideWhen="ios"><ion-icon name="create"></ion-icon></button>

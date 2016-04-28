@@ -1,4 +1,7 @@
 <ion-navbar *navbar hideBackButton class="show-navbar">
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
   <ion-searchbar [(ngModel)]="searchQuery" (input)="getItems($event)"></ion-searchbar>
 </ion-navbar>
 
