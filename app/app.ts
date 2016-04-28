@@ -1,7 +1,12 @@
 import {App, IonicApp, Platform, MenuController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {HelloIonicPage} from './pages/hello-ionic/hello-ionic';
+import {HomePage} from './pages/home/home';
 import {ListPage} from './pages/list/list';
+import {CardPage} from './pages/card/card';
+import {ActionSheetsPage} from './pages/actionSheets/actionSheets';
+import {SelectPage} from './pages/select/select';
+import {SlidesPage} from './pages/slides/slides';
+import * as toolbar from './pages/toolbar/toolbar';
 
 
 @App({
@@ -10,8 +15,8 @@ import {ListPage} from './pages/list/list';
 })
 class MyApp {
   // make HelloIonicPage the root (or first) page
-  rootPage: any = HelloIonicPage;
-  pages: Array<{title: string, component: any}>;
+  rootPage: any = HomePage;
+  pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(
     private app: IonicApp,
@@ -22,8 +27,14 @@ class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Hello Ionic', component: HelloIonicPage },
-      { title: 'My First List', component: ListPage }
+      { title: 'Home', component: HomePage , icon: 'home' },
+      { title: 'List', component: ListPage, icon: 'list' },
+      { title: 'Card', component: CardPage, icon: 'card' },
+      { title: 'Action Sheet', component: ActionSheetsPage, icon: 'magnet' },
+      { title: 'Select', component: SelectPage, icon: 'ios-arrow-dropdown' },
+      { title: 'Slides', component: SlidesPage, icon: 'ios-arrow-dropdown' },
+       { title: 'ToolBar', component: toolbar, icon: 'ios-arrow-dropdown' }
+
     ];
   }
 

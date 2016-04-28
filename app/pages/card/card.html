@@ -1,0 +1,27 @@
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Card List</ion-title>
+</ion-navbar>
+
+<ion-content>
+  <ion-card ion-item *ngFor="#item of items">
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="img/{{item.img}}" />
+      </ion-avatar>
+      <h2>{{item.title}}</h2>
+    </ion-item>
+    <ion-card-content>
+      <div class="item-note" item-right>{{item.note}}</div>
+      <ion-item>
+            <button primary clear item-left>  
+              <ion-icon [name]="item.icon" item-left></ion-icon>
+              <div>{{item.like}} Likes</div>
+            </button>
+            <ion-note item-right>11h ago</ion-note>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
