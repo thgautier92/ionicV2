@@ -19,5 +19,8 @@ export class MovieService {
         let options = new RequestOptions({ headers: headers });
         var url = this._Url + '/_all_docs?include_docs=true';
         return this.http.get(url,options).map(res => res.json());
+    };
+    getServer() {
+        return this._Url;
     }
 }

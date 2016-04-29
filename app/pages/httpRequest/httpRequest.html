@@ -15,10 +15,19 @@
 
     <ion-item *ngFor="#movie of movies" (click)="itemTapped($event, movie)">
       <ion-avatar item-left>
-        <img src="http://gautiersa.fr:81/movies/{{movie.doc._id}}/{{movie.doc._attachments}}" />
+        <div *ngFor='#imgKey of movie.doc._attachments | values:"key":true'>
+          <span [ngSwitch]="imgKey.content_type">
+            <p *ngSwitchWhen="application/pdf">No preview</p>
+            <p *ngSwitchDefault><img src="{{urlSrv}}/{{movie.id}}/{{imgKey.key}}"/></p>
+          </span>
+        </div>
       </ion-avatar>
       <h2>{{movie.doc.title}}</h2>
       <p class="item-description">{{movie.doc.genre}} {{movie.doc.releaseYear}}</p>
+      <div *ngFor='#imgKey of movie.doc._attachments | values:"key":true'>
+        <p class="item-description">Nom:{{imgKey.key}} Type:{{imgKey.content_type}} Taille:{{imgKey.length}}</p>
+      </div>
+
     </ion-item>
   </ion-list>
 </ion-content>
