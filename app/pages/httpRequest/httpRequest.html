@@ -1,0 +1,24 @@
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Http Request</ion-title>
+</ion-navbar>
+
+<ion-content padding>
+  <ion-list>
+    <ion-header>
+      <ion-item>
+        <ion-input type="text" placeholder="Cherche un film..." (input)="searchMovieDB($event, searchKey)"></ion-input>
+      </ion-item>
+    </ion-header>
+
+    <ion-item *ngFor="#movie of movies" (click)="itemTapped($event, movie)">
+      <ion-avatar item-left>
+        <img src="http://gautiersa.fr:81/movies/{{movie.doc._id}}/{{movie.doc._attachments}}" />
+      </ion-avatar>
+      <h2>{{movie.doc.title}}</h2>
+      <p class="item-description">{{movie.doc.genre}} {{movie.doc.releaseYear}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -8,6 +8,7 @@ import {SelectPage} from './pages/select/select';
 import * as slides from './pages/slides/slides';
 import * as toolbar from './pages/toolbar/toolbar';
 import * as inputs from './pages/inputs/inputs';
+import * as httpDemo from './pages/httpRequest/httpRequest';
 
 
 @App({
@@ -29,6 +30,7 @@ class MyApp {
     // set our app's pages
     this.pages = [
       { title: 'Home', component: HomePage , icon: 'home' },
+      { title: 'Http', component: httpDemo.MovieListPage, icon: 'keypad' },
       { title: 'List', component: ListPage, icon: 'list' },
       { title: 'Card', component: CardPage, icon: 'card' },
       { title: 'Action Sheet', component: ActionSheetsPage, icon: 'magnet' },
