@@ -32,7 +32,7 @@ class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage , icon: 'home' },
       { title: 'Http', component: httpDemo.MovieListPage, icon: 'keypad' },
-      { title: 'Network', component: networkInfo.networkPage, icon: 'keypad' },
+      { title: 'Network', component: networkInfo.networkPage, icon: 'wifi' },
       { title: 'List', component: ListPage, icon: 'list' },
       { title: 'Card', component: CardPage, icon: 'card' },
       { title: 'Action Sheet', component: ActionSheetsPage, icon: 'magnet' },

@@ -11,7 +11,7 @@
         <ion-item-group>
             <ion-item-divider light>Information sur le réseau</ion-item-divider>
             <ion-item>
-                <ion-icon name="info" item-left></ion-icon>
+                <ion-icon name="information-circle" item-left></ion-icon>
                 Type de réseau
                 <ion-badge item-right>{{netInfo.type}}</ion-badge>
             </ion-item>
@@ -24,8 +24,7 @@
         <ion-item-group>
             <ion-item-divider light>Information sur le device</ion-item-divider>
             <ion-item class="item" *ngFor='#item of deviceInfo | objToArray'>
-                <ion-icon name="information-circle"></ion-icon>
-                <h4>{{item.key}}</h4>
+                <h3>{{item.key}}</h3>
                 <ion-note item-right>{{item.value}}</ion-note>
             </ion-item>
         </ion-item-group>

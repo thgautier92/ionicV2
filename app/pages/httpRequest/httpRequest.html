@@ -25,7 +25,8 @@
       <h2>{{movie.doc.title}}</h2>
       <p class="item-description">{{movie.doc.genre}} {{movie.doc.releaseYear}}</p>
       <div *ngFor='#imgKey of movie.doc._attachments | objToArray'>
-        <p class="item-description">Nom:{{imgKey.key}} Type:{{imgKey.value.content_type}} Taille:{{imgKey.value.length}}</p>
+        <p class="item-description">Nom:{{imgKey.key}}</p>
+        <p> Type:{{imgKey.value.content_type}} Taille:{{imgKey.value.length}}</p>
       </div>
 
     </ion-item>
