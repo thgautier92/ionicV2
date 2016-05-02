@@ -1,0 +1,21 @@
+<!--
+  Generated template for the DemoPagesPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Composants Ionic V2</ion-title>
+</ion-navbar>
+
+<ion-content padding class="demo-pages">
+  <ion-list>
+    <button ion-item *ngFor="#item of items" (click)="openNavDetailsPage(item)">
+      <ion-icon [name]="item.icon" [ngStyle]="{'color': item.color}" item-left></ion-icon>
+      {{ item.title }}
+    </button>
+  </ion-list>
+</ion-content>

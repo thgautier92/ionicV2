@@ -1,13 +1,7 @@
 import {App, IonicApp, Platform, MenuController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from './pages/home/home';
-import {ListPage} from './pages/list/list';
-import {CardPage} from './pages/card/card';
-import {ActionSheetsPage} from './pages/actionSheets/actionSheets';
-import {SelectPage} from './pages/select/select';
-import * as slides from './pages/slides/slides';
-import * as toolbar from './pages/toolbar/toolbar';
-import * as inputs from './pages/inputs/inputs';
+import * as demoPages from './pages/demo-pages/demo-pages';
 import * as httpDemo from './pages/httpRequest/httpRequest';
 import * as networkInfo from './pages/network/network';
 
@@ -33,14 +27,7 @@ class MyApp {
       { title: 'Home', component: HomePage , icon: 'home' },
       { title: 'Http', component: httpDemo.MovieListPage, icon: 'keypad' },
       { title: 'Network', component: networkInfo.networkPage, icon: 'wifi' },
-      { title: 'List', component: ListPage, icon: 'list' },
-      { title: 'Card', component: CardPage, icon: 'card' },
-      { title: 'Action Sheet', component: ActionSheetsPage, icon: 'magnet' },
-      { title: 'Select', component: SelectPage, icon: 'ios-arrow-dropdown' },
-      { title: 'Slides', component: slides.SlidesPage, icon: 'albums' },
-      { title: 'ToolBar Search', component: toolbar.SearchbarPage, icon: 'search' },
-      { title: 'ToolBar Segment', component: toolbar.SegmentPage, icon: 'options' },
-      { title: 'Form Fixed', component: inputs.FixedInlinePage, icon: 'keypad' },
+      { title: 'Composants', component: demoPages.DemoPagesPage, icon: 'desktop' }
     ];
   }
 
