@@ -16,8 +16,8 @@ export class MediaPage {
     this.nav = nav;
     this.items = [
       { 'title': 'Camera', 'icon': 'camera', 'description': 'Appareil Photo', 'link': CameraPage, 'color': this.getRandomColor() },
-      { 'title': 'Images', 'icon': 'camera', 'description': 'Acceder à vos photos, stocké sur votre appareil', 'link': ImagePickerPage, 'color': this.getRandomColor() },
-      { 'title': 'Images', 'icon': 'camera', 'description': 'Acceder à vos photos, stocké sur votre appareil', 'link': ImagePickerPage, 'color': this.getRandomColor() },
+      { 'title': 'Images', 'icon': 'camera', 'description': 'Acceder à vos photos, stockées sur votre appareil', 'link': ImagePickerPage, 'color': this.getRandomColor() },
+      { 'title': 'Images', 'icon': 'camera', 'description': 'Acceder à vos photos, stockées sur votre appareil', 'link': ImagePickerPage, 'color': this.getRandomColor() },
     ]
   }
   openNavDetailsPage(item) {

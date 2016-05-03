@@ -9,5 +9,13 @@
 </ion-navbar>
 
 <ion-content padding class="image-picker">
-  
+  <ion-list>
+    <ion-item *ngFor="#item of images">
+      <ion-thumbnail item-left>
+        <img [src]="item">
+      </ion-thumbnail>
+      <p>{{item}}</p>
+      <button clear item-right>Share</button>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -1,0 +1,32 @@
+<!--
+  Generated template for the QrCodePage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Qr Code</ion-title>
+</ion-navbar>
+
+<ion-content padding class="qr-code">
+  <ion-card>
+    <ion-card-header>
+      <button (click)="scanCode()">Scan</button>
+    </ion-card-header>
+    <ion-card-content>
+      <div [hidden]="!barCode.cancelled">
+        <h4>Texte :</h4>
+        <pre>{{barCode.text}}</pre>
+        <h5>Type : {{barCode.format}}</h5>
+        <button class="button" ng-if="url" (click)="openUrl(url)">Ouvrir le site...</button>
+      </div>
+      <h5 [hidden]="barCode.cancelled">Scan abandonné</h5>
+    </ion-card-content>
+    <ion-card-header *ngIf="barCodeErr">
+      {{barCodeErr}}
+    </ion-card-header>
+  </ion-card>
+</ion-content>

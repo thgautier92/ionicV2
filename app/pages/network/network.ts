@@ -34,10 +34,7 @@ export class networkPage {
       console.log(this.deviceInfo);
       this.checkNetwork();
     });
-    
-    
-    
-    
+
     // watch network for a disconnect
     let disconnectSubscription = Network.onDisconnect().subscribe(() => {
       console.log('network was disconnected :-( ')

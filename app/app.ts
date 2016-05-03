@@ -5,6 +5,7 @@ import * as demoPages from './pages/demo-pages/demo-pages';
 import * as httpDemo from './pages/httpRequest/httpRequest';
 import * as networkInfo from './pages/network/network';
 import * as media from './pages/media/media';
+import * as qrcode from './pages/qr-code/qr-code';
 
 
 @App({
@@ -29,7 +30,8 @@ class MyApp {
       { title: 'Http', component: httpDemo.MovieListPage, icon: 'keypad' },
       { title: 'Network', component: networkInfo.networkPage, icon: 'wifi' },
       { title: 'Composants', component: demoPages.DemoPagesPage, icon: 'desktop' },
-      { title: 'Media', component: media.MediaPage, icon: 'desktop' }
+      { title: 'Media', component: media.MediaPage, icon: 'images' },
+      { title: 'QrCode', component: qrcode.QrCodePage , icon: 'qr-scanner' }
     ];
   }
 
