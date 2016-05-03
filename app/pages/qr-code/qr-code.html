@@ -17,7 +17,8 @@
       <button (click)="scanCode()">Scan</button>
     </ion-card-header>
     <ion-card-content>
-      <div [hidden]="!barCode.cancelled">
+      {{barCode}}
+      <div>
         <h4>Texte :</h4>
         <pre>{{barCode.text}}</pre>
         <h5>Type : {{barCode.format}}</h5>
