@@ -15,6 +15,9 @@
     Cette application vous présente toutes les fonctions présentes dans IONIC V2 et les outils CORDOVA.
     Elle sert dans le cycle de <b>Recherche et Developpement du Groupe SMA</b> à evaluer les outils et leurs intégrations en situation d'ultra Mobilité
   </p>
+  <p>
+    <button primary menuToggle>Activer le Menu</button>
+  </p>
   <ion-list>
     <button ion-item *ngFor="#item of items" (click)="openLink(item)">
       <ion-avatar item-left>
@@ -24,8 +27,6 @@
       <p>{{item.description}}</p>
     </button>
   </ion-list>
-  <p>
-    <button primary menuToggle>Activer le Menu</button>
-  </p>
+  
 
 </ion-content>

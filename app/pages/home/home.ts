@@ -1,4 +1,4 @@
-import {Page} from 'ionic-angular';
+import {Page, Platform} from 'ionic-angular';
 
 
 @Page({
@@ -6,7 +6,9 @@ import {Page} from 'ionic-angular';
 })
 export class HomePage {
   items = []
-  constructor() {
+  platform:any;
+  constructor(platform: Platform) {
+    this.platform = platform;  
     this.items = [
       { title: 'Ionic', version: '2.0 beta 25', icon: 'ionicV2.png', description: 'Nouvelle version', link: 'http://ionicframework.com/docs/v2/' },
       { title: 'Angular', version: '2.0', icon: 'angularV2.png', description: 'Nouvelle version', link: 'https://angular.io/' },
@@ -14,6 +16,8 @@ export class HomePage {
     ]
   }
   openLink(item) {
-    window.open(item.link,"_system");
+    this.platform.ready().then(() => {
+            window.open(item.link, "_system", "location=true");
+        });
   }
 }

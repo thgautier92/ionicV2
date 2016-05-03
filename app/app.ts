@@ -4,6 +4,7 @@ import {HomePage} from './pages/home/home';
 import * as demoPages from './pages/demo-pages/demo-pages';
 import * as httpDemo from './pages/httpRequest/httpRequest';
 import * as networkInfo from './pages/network/network';
+import * as media from './pages/media/media';
 
 
 @App({
@@ -27,7 +28,8 @@ class MyApp {
       { title: 'Home', component: HomePage , icon: 'home' },
       { title: 'Http', component: httpDemo.MovieListPage, icon: 'keypad' },
       { title: 'Network', component: networkInfo.networkPage, icon: 'wifi' },
-      { title: 'Composants', component: demoPages.DemoPagesPage, icon: 'desktop' }
+      { title: 'Composants', component: demoPages.DemoPagesPage, icon: 'desktop' },
+      { title: 'Media', component: media.MediaPage, icon: 'desktop' }
     ];
   }
 
