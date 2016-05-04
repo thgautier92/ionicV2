@@ -15,9 +15,9 @@ export class MediaPage {
   constructor(public nav: NavController) {
     this.nav = nav;
     this.items = [
-      { 'title': 'Camera', 'icon': 'camera', 'description': 'Appareil Photo', 'link': CameraPage, 'color': this.getRandomColor() },
-      { 'title': 'Images', 'icon': 'camera', 'description': 'Acceder à vos photos, stockées sur votre appareil', 'link': ImagePickerPage, 'color': this.getRandomColor() },
-      { 'title': 'Images', 'icon': 'camera', 'description': 'Acceder à vos photos, stockées sur votre appareil', 'link': ImagePickerPage, 'color': this.getRandomColor() },
+      { 'title': 'Camera', 'icon': 'camera', 'description': 'Prendre une photo, la recadrer et la partager', 'link': CameraPage, 'color': this.getRandomColor() },
+      { 'title': 'Images', 'icon': 'images', 'description': 'Acceder à vos photos, stockées sur votre appareil', 'link': ImagePickerPage, 'color': this.getRandomColor() },
+      { 'title': 'Test', 'icon': 'ionic', 'description': 'Fonction en cours de réalisation', 'link': null, 'color': this.getRandomColor() },
     ]
   }
   openNavDetailsPage(item) {

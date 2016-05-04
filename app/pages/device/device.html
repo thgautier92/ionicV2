@@ -1,5 +1,5 @@
 <!--
-  Generated template for the MediaPage page.
+  Generated template for the DevicePage page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
@@ -8,10 +8,10 @@
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>Média</ion-title>
+  <ion-title>Device</ion-title>
 </ion-navbar>
 
-<ion-content padding class="media">
+<ion-content padding class="device">
   <ion-row wrap>
     <ion-col width-50 *ngFor="#item of items">
       <button round full large (click)="openNavDetailsPage(item)">
@@ -19,7 +19,6 @@
         {{item.title}}
         </button>
         <p>{{item.description}}</p>
-      
     </ion-col>
   </ion-row>
 </ion-content>

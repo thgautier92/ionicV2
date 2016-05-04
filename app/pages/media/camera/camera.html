@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-navbar *navbar>
-  <ion-title>camera</ion-title>
+  <ion-title>Camera</ion-title>
 </ion-navbar>
 
 <ion-content padding class="camera">
@@ -33,11 +33,11 @@
         <ion-label> Sauvegarder la photo dans votre album</ion-label>
         <ion-toggle [(ngModel)]="cameraOpt.saveToPhotoAlbum"></ion-toggle>
       </ion-item>
-      <button full (click)="getPhoto()"><ion-icon name="camera"></ion-icon> Prendre une photo</button>
+      <button fab blue fab-bottom fab-center class="fab-footer" (click)="getPhoto()"><ion-icon name="camera"></ion-icon></button>
     </ion-list>
 
   </ion-card>
-  <ion-card>
+  <ion-card *ngIf="base64Image">
     <ion-item>
       <img [src]="base64Image">
     </ion-item>

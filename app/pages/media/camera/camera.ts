@@ -1,6 +1,7 @@
 import {Page, Platform, NavController} from 'ionic-angular';
 import {Toast} from 'ionic-angular';
 import {Camera} from 'ionic-native';
+import {DisplayTools} from '../../comon/display'
 
 /*
   Generated class for the CameraPage page.
@@ -10,18 +11,22 @@ import {Camera} from 'ionic-native';
 */
 @Page({
   templateUrl: 'build/pages/media/camera/camera.html',
+  providers: [DisplayTools]
 })
 export class CameraPage {
   platform: any;
+  display:any;
   cameraOpt: any;
   cameraSrc: any;
   options: any;
   onDevice: any;
   base64Image:any;
 
-  constructor(public nav: NavController, platform: Platform) {
+  constructor(public nav: NavController, platform: Platform, display:DisplayTools) {
     this.platform = platform
+    this.display=display;
     this.cameraSrc = "";
+    this.base64Image="";
     this.cameraOpt = { quality: 50, allowEdit: true, saveToPhotoAlbum: false, correctOrientation: true };
     this.onDevice = this.platform.is('ios') || this.platform.is('android') || this.platform.is('windows');
   }
@@ -45,23 +50,10 @@ export class CameraPage {
         // If it's base64:
         this.base64Image = "data:image/jpeg;base64," + imageData;
       }, (err) => {
-        this.displayToast("Caméra erreur : "+err);
+        this.display.displayToast("Caméra erreur : "+err);
       });
     } else {
-        this.displayToast("Caméra non disponible en mode WEB");
+        this.display.displayToast("Caméra non disponible en mode WEB");
     }
-  }
-  displayToast(msg) {
-    let toast = Toast.create({
-      message: msg,
-      duration: 3000,
-      showCloseButton:true,
-      closeButtonText:"Fermer"
-    });
-
-    toast.onDismiss(() => {
-      //console.log('Dismissed toast');
-    });
-    this.nav.present(toast);
   }
 }

@@ -31,7 +31,10 @@
     "cordova-plugin-camera",
     "cordova-plugin-compat",
     "cordova-plugin-image-picker",
-    "phonegap-plugin-barcodescanner"
+    "phonegap-plugin-barcodescanner",
+    "cordova-plugin-device-motion",
+    "cordova-plugin-device-orientation",
+    "cordova-plugin-geolocation"
   ],
   "cordovaPlatforms": [
     {

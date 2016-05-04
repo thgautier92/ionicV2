@@ -4,8 +4,8 @@ import {Injectable} from 'angular2/core';
 @Injectable()
 export class DisplayTools {
     constructor(private nav: NavController) {
-        this.nav=nav;
-     }
+        this.nav = nav;
+    }
     displayToast(msg) {
         let toast = Toast.create({
             message: msg,
@@ -22,5 +22,13 @@ export class DisplayTools {
     displayAlert(msg) {
         console.log(msg);
         alert(msg);
+    }
+    getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
     }
 }
