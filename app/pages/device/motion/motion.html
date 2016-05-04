@@ -5,9 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-navbar *navbar>
-  <ion-title>Motion</ion-title>
+  <ion-title>Mouvements</ion-title>
 </ion-navbar>
 
 <ion-content padding class="motion">
-  {{acc | json}}
+ <button *ngIf="pluginOk" fab secondary fab-bottom fab-left class="fab-footer" (click)="startWatch()"><ion-icon name="play"></ion-icon></button>
+  <button *ngIf="pluginOk" fab danger fab-bottom fab-right class="fab-footer" (click)="stopWatch()"><ion-icon name="pause"></ion-icon></button>
+  <button *ngIf="record" fab primary fab-bottom fab-center class="fab-footer"><ion-icon name="recording"></ion-icon></button>
+  <div *ngIf="pluginOk">
+    <h4>Les données :</h4>
+    <p>x : {{acc.x}}</p>
+    <p>y : {{acc.y}}</p>
+    <p>z : {{acc.z}}</p>
+    <p>{{acc.timestamp}}</p>
+  </div>
+  <p *ngIf="!pluginOk">Fonction MOUVEMENTS non disponible en mode WEB</p>
 </ion-content>

@@ -1,10 +1,19 @@
-import {Toast, NavController} from 'ionic-angular';
+import {Loading, Toast, NavController} from 'ionic-angular';
 import {Injectable} from 'angular2/core';
 
 @Injectable()
 export class DisplayTools {
     constructor(private nav: NavController) {
-        this.nav = nav;
+        this.nav = nav;  
+    }
+    displayLoading(msg) {
+        let loading = Loading.create({
+            content: msg,
+            duration: 5000
+        });
+        this.nav.present(loading);
+        return loading;
+        
     }
     displayToast(msg) {
         let toast = Toast.create({
@@ -17,7 +26,6 @@ export class DisplayTools {
             //console.log('Dismissed toast');
         });
         this.nav.present(toast);
-        //return new Promise((resolve, reject) => resolve(true));
     }
     displayAlert(msg) {
         console.log(msg);

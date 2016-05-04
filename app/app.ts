@@ -32,7 +32,7 @@ class MyApp {
       { title: 'Network', component: networkInfo.networkPage, icon: 'wifi' },
       { title: 'Composants', component: demoPages.DemoPagesPage, icon: 'desktop' },
       { title: 'Media', component: media.MediaPage, icon: 'images' },
-      { title: 'Device', component: device.DevicePage, icon: 'device' },
+      { title: 'Device', component: device.DevicePage, icon: 'phone-portrait' },
       { title: 'QrCode', component: qrcode.QrCodePage , icon: 'qr-scanner' }
     ];
   }

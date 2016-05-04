@@ -34,7 +34,9 @@
     "phonegap-plugin-barcodescanner",
     "cordova-plugin-device-motion",
     "cordova-plugin-device-orientation",
-    "cordova-plugin-geolocation"
+    "cordova-plugin-geolocation",
+    "uk.co.workingedge.phonegap.plugin.launchnavigator",
+    "cordova-plugin-actionsheet"
   ],
   "cordovaPlatforms": [
     {

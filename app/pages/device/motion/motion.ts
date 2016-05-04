@@ -2,36 +2,46 @@ import {Page, NavController} from 'ionic-angular';
 import {DisplayTools} from '../../comon/display';
 import {DeviceMotion} from 'ionic-native';
 
-/*
-  Generated class for the MotionPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Page({
   templateUrl: 'build/pages/device/motion/motion.html',
   providers: [DisplayTools]
 })
 export class MotionPage {
-  display: any;
+  display: DisplayTools;
   subscription: any;
   acc: any;
+  pluginOk: boolean;
+  record: boolean;
   constructor(public nav: NavController, display: DisplayTools) {
     this.display = display;
+    this.pluginOk = false;
+    this.record=false;
+    this.getCurrent();
+  }
+  getCurrent() {
     DeviceMotion.getCurrentAcceleration().then(
-      acceleration => this.acc = acceleration,
-      error => this.display.displayToast(error)
+      acceleration => {
+        this.acc = acceleration;
+        this.pluginOk = true;
+      }
+      , error => {
+        this.display.displayToast(error);
+        this.pluginOk = false;
+      }
     );
   }
   startWatch() {
     // Watch device acceleration
     this.subscription = DeviceMotion.watchAcceleration().subscribe(acceleration => {
+      this.record=true;
       console.log(acceleration);
       this.acc = acceleration;
+      
     });
   }
   stoptWatch() {
     // Stop watch
     this.subscription.unsubscribe();
+    this.record=false;
   }
 }

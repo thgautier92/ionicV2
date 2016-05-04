@@ -21,9 +21,9 @@ export class DevicePage {
     this.nav = nav;
     this.display = display;
     this.items = [
-      { 'title': 'Motion', 'icon': 'camera', 'description': "Mesure de l\'acceleration", 'link': MotionPage, 'color': this.display.getRandomColor() },
-      { 'title': 'Orientation', 'icon': 'images', 'description': "Détection de l'orientation", 'link': orientationPage, 'color': this.display.getRandomColor() },
-      { 'title': 'Geolocation', 'icon': 'ionic', 'description': 'Géolocalisation', 'link': geolocationPage, 'color': this.display.getRandomColor() },
+      { 'title': 'Mouvements', 'icon': 'move', 'description': "Mesure des mouvements", 'link': MotionPage, 'color': this.display.getRandomColor() },
+      { 'title': 'Boussole', 'icon': 'compass', 'description': "Détection de l'orientation", 'link': orientationPage, 'color': this.display.getRandomColor() },
+      { 'title': 'Position', 'icon': 'locate', 'description': 'Géolocalisation', 'link': geolocationPage, 'color': this.display.getRandomColor() },
     ]
   }
   openNavDetailsPage(item) {
