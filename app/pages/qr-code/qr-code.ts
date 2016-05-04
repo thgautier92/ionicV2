@@ -1,18 +1,22 @@
 import {Page, Platform, NavController} from 'ionic-angular';
 import {BarcodeScanner} from 'ionic-native';
+import {DisplayTools} from '../comon/display'
 
 @Page({
   templateUrl: 'build/pages/qr-code/qr-code.html',
+  providers: [DisplayTools]
 })
 export class QrCodePage {
   platform:any;
+  displayTools:any;
   barCode:any;
   url:any;
   barCodeVerif:any;
   barText:any;
   barCodeErr:any;
-  constructor(public nav: NavController, platform: Platform) {
+  constructor(public nav: NavController, platform: Platform, displayTools: DisplayTools) {
     this.platform = platform;
+    this.displayTools = displayTools;
     this.barCode = {}; 
     this.url = "";
     this.barCodeVerif = {};
@@ -35,7 +39,8 @@ export class QrCodePage {
             // An error occurred
             this.barCode = {};
             this.url = "";
-            this.barCodeErr = err;    
+            this.barCodeErr = err;
+            this.displayTools.displayToast(err);
         });
       });
   };

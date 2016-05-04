@@ -17,6 +17,7 @@ export class CameraPage {
   cameraSrc: any;
   options: any;
   onDevice: any;
+  base64Image:any;
 
   constructor(public nav: NavController, platform: Platform) {
     this.platform = platform
@@ -42,7 +43,7 @@ export class CameraPage {
       Camera.getPicture(this.options).then((imageData) => {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64:
-        let base64Image = "data:image/jpeg;base64," + imageData;
+        this.base64Image = "data:image/jpeg;base64," + imageData;
       }, (err) => {
         this.displayToast("Caméra erreur : "+err);
       });

@@ -13,21 +13,17 @@
 
 <ion-content padding class="qr-code">
   <ion-card>
-    <ion-card-header>
-      <button (click)="scanCode()">Scan</button>
-    </ion-card-header>
     <ion-card-content>
-      {{barCode}}
-      <div>
         <h4>Texte :</h4>
         <pre>{{barCode.text}}</pre>
         <h5>Type : {{barCode.format}}</h5>
-        <button class="button" ng-if="url" (click)="openUrl(url)">Ouvrir le site...</button>
-      </div>
-      <h5 [hidden]="barCode.cancelled">Scan abandonné</h5>
+        <button class="button" *ngIf="url" (click)="openUrl(url)">Ouvrir le site...</button>
     </ion-card-content>
     <ion-card-header *ngIf="barCodeErr">
       {{barCodeErr}}
     </ion-card-header>
   </ion-card>
+  <button fab blue fab-bottom fab-center class="fab-footer" (click)="scanCode()">
+    <ion-icon name="qr-scanner"></ion-icon>
+  </button>
 </ion-content>
