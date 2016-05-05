@@ -7,6 +7,7 @@ import * as networkInfo from './pages/network/network';
 import * as media from './pages/media/media';
 import * as device from './pages/device/device';
 import * as qrcode from './pages/qr-code/qr-code';
+import * as appBrowser from './pages/app-browser/app-browser';
 
 
 @App({
@@ -33,7 +34,8 @@ class MyApp {
       { title: 'Composants', component: demoPages.DemoPagesPage, icon: 'desktop' },
       { title: 'Media', component: media.MediaPage, icon: 'images' },
       { title: 'Device', component: device.DevicePage, icon: 'phone-portrait' },
-      { title: 'QrCode', component: qrcode.QrCodePage , icon: 'qr-scanner' }
+      { title: 'QrCode', component: qrcode.QrCodePage , icon: 'qr-scanner' },
+      { title: 'Web', component: appBrowser.AppBrowserPage , icon: 'send' }
     ];
   }
 

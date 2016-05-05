@@ -3,13 +3,8 @@ import {DisplayTools} from '../comon/display'
 import {MotionPage} from './motion/motion';
 import {orientationPage} from './orientation/orientation';
 import {geolocationPage} from './geolocation/geolocation';
+import {smsPage} from './sms/sms';
 
-/*
-  Generated class for the DevicePage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Page({
   templateUrl: 'build/pages/device/device.html',
   providers: [DisplayTools]
@@ -24,6 +19,7 @@ export class DevicePage {
       { 'title': 'Mouvements', 'icon': 'move', 'description': "Mesure des mouvements", 'link': MotionPage, 'color': this.display.getRandomColor() },
       { 'title': 'Boussole', 'icon': 'compass', 'description': "Détection de l'orientation", 'link': orientationPage, 'color': this.display.getRandomColor() },
       { 'title': 'Position', 'icon': 'locate', 'description': 'Géolocalisation', 'link': geolocationPage, 'color': this.display.getRandomColor() },
+      { 'title': 'SMS', 'icon': 'send', 'description': 'Envoi de SMS', 'link': smsPage, 'color': this.display.getRandomColor() },
     ]
   }
   openNavDetailsPage(item) {

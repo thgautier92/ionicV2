@@ -5,9 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-navbar *navbar>
-  <ion-title>orientation</ion-title>
+  <ion-title>Orientation</ion-title>
 </ion-navbar>
 
 <ion-content padding class="orientation">
-  
+  <button *ngIf="pluginOk" fab secondary fab-bottom fab-left class="fab-footer" (click)="startWatch()"><ion-icon name="play"></ion-icon></button>
+  <button *ngIf="pluginOk" fab danger fab-bottom fab-right class="fab-footer" (click)="stopWatch()"><ion-icon name="pause"></ion-icon></button>
+  <button *ngIf="record" fab primary fab-bottom fab-center class="fab-footer"><ion-icon name="recording"></ion-icon></button>
+  <div *ngIf="pluginOk">
+    <ion-list>
+      <ion-item-divider light> Votre orientation à {{orient.timestamp}}</ion-item-divider>
+      <ion-item>Nord Magnetic : {{orient.magneticHeading}}°</ion-item>
+      <ion-item>True Heading : {{orient.trueHeading}}</ion-item>
+      <ion-item>Précision : {{orient.headingAccuracy}} metres</ion-item>
+    </ion-list>
+  </div>
 </ion-content>

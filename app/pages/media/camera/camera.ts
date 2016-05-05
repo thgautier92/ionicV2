@@ -21,12 +21,14 @@ export class CameraPage {
   options: any;
   onDevice: any;
   base64Image:any;
+  displayOptions:boolean;
 
   constructor(public nav: NavController, platform: Platform, display:DisplayTools) {
     this.platform = platform
     this.display=display;
     this.cameraSrc = "";
     this.base64Image="";
+    this.displayOptions=false;
     this.cameraOpt = { quality: 50, allowEdit: true, saveToPhotoAlbum: false, correctOrientation: true };
     this.onDevice = this.platform.is('ios') || this.platform.is('android') || this.platform.is('windows');
   }
@@ -55,5 +57,8 @@ export class CameraPage {
     } else {
         this.display.displayToast("Caméra non disponible en mode WEB");
     }
+  }
+  showOptions(){
+    this.displayOptions = ! this.displayOptions;
   }
 }

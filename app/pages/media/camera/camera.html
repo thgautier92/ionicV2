@@ -6,20 +6,25 @@
 -->
 <ion-navbar *navbar>
   <ion-title>Camera</ion-title>
+  <ion-buttons end>
+    <button royal (click)="showOptions()">
+      <ion-icon name="options"></ion-icon>
+    </button>
+  </ion-buttons>
 </ion-navbar>
 
 <ion-content padding class="camera">
+  <button fab blue fab-bottom fab-center class="fab-footer" (click)="getPhoto()"><ion-icon name="camera"></ion-icon></button>
   <ion-card>
-    <ion-list>
+    <ion-list [hidden]="!displayOptions">
       <ion-list-header>Options</ion-list-header>
       <ion-item>
         <ion-label>Qualité</ion-label>
-       
-  <ion-select [(ngModel)]="cameraOpt.quality">
-    <ion-option value=0 checked="false">Basse résolution</ion-option>
-    <ion-option value=50 checked="true">Moyenne résolution</ion-option>
-    <ion-option value=100 checked="false">Haute résolution</ion-option>
-  </ion-select>
+        <ion-select [(ngModel)]="cameraOpt.quality">
+          <ion-option value=0 checked="false">Basse résolution</ion-option>
+          <ion-option value=50 checked="true">Moyenne résolution</ion-option>
+          <ion-option value=100 checked="false">Haute résolution</ion-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label> Edition de la photo</ion-label>
@@ -33,10 +38,9 @@
         <ion-label> Sauvegarder la photo dans votre album</ion-label>
         <ion-toggle [(ngModel)]="cameraOpt.saveToPhotoAlbum"></ion-toggle>
       </ion-item>
-      <button fab blue fab-bottom fab-center class="fab-footer" (click)="getPhoto()"><ion-icon name="camera"></ion-icon></button>
     </ion-list>
-
   </ion-card>
+  
   <ion-card *ngIf="base64Image">
     <ion-item>
       <img [src]="base64Image">
