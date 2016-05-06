@@ -38,7 +38,8 @@
     "phonegap-plugin-barcodescanner",
     "uk.co.workingedge.phonegap.plugin.launchnavigator",
     "com.cordova.plugins.sms",
-    "cordova-plugin-inappbrowser"
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-email-composer"
   ],
   "cordovaPlatforms": [
     {

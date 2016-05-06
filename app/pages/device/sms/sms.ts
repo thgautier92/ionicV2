@@ -18,15 +18,7 @@ export class smsPage {
   }
   sendSms() {
     try {
-      SMS.send(this.sms.tel,this.sms.msg,
-      function(data){
-        console.log(data);
-        this.display.displayToast("Message prêt");
-        
-      }, function(error){
-        console.log(error);
-        this.display.displayToast(error);
-      });
+      SMS.send(this.sms.tel,this.sms.msg);
     } catch(e){
       this.display.displayToast("Fonction non disponible en mode WEB");
     }

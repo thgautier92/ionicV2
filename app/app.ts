@@ -8,6 +8,7 @@ import * as media from './pages/media/media';
 import * as device from './pages/device/device';
 import * as qrcode from './pages/qr-code/qr-code';
 import * as appBrowser from './pages/app-browser/app-browser';
+import * as email from './pages/email/email';
 
 
 @App({
@@ -35,7 +36,8 @@ class MyApp {
       { title: 'Media', component: media.MediaPage, icon: 'images' },
       { title: 'Device', component: device.DevicePage, icon: 'phone-portrait' },
       { title: 'QrCode', component: qrcode.QrCodePage , icon: 'qr-scanner' },
-      { title: 'Web', component: appBrowser.AppBrowserPage , icon: 'send' }
+      { title: 'Web', component: appBrowser.AppBrowserPage , icon: 'send' },
+      { title: 'Email', component: email.EmailPage , icon: 'mail' }
     ];
   }
 

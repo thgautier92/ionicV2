@@ -4,7 +4,7 @@ import {Page, NavController, NavParams} from 'ionic-angular';
   templateUrl: 'build/pages/demo-pages/select/select.html'
 })
 export class SelectPage {
-    gaming: string = "n64";
+  gaming: string = "n64";
   gender: string = "f";
   musicAlertOpts: { title: string, subTitle: string };
 

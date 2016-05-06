@@ -5,16 +5,25 @@
   Ionic pages and navigation.
 -->
 <ion-navbar *navbar>
-  <ion-title>appBrowser</ion-title>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Navigateur WEB</ion-title>
 </ion-navbar>
 
 <ion-content padding class="app-browser">
   <ion-list>
+    <ion-item>
+      <ion-label>Destination</ion-label>
+      <ion-select [(ngModel)]="dest" cancelText="Annuler" okText="Ok">
+        <ion-option *ngFor="#o of lstDest" [value]="o.code">{{o.lib}}</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-item *ngFor="#item of lstUrl" (click)="openUrl(item.url);">
       <ion-avatar item-left>
         <img src="{{item.img}}">
       </ion-avatar>
-      <h2>{{item}}</h2>
+      <h2>{{item.title}}</h2>
       <p>{{item.url}}</p>
     </ion-item>
   </ion-list>
