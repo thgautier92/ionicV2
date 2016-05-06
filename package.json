@@ -44,7 +44,7 @@
   "cordovaPlatforms": [
     {
       "platform": "android",
-      "locator": "windows"
+      "locator": "osx"
     },
     "ios",
     {
