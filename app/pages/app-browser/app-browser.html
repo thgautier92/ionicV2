@@ -9,9 +9,12 @@
 </ion-navbar>
 
 <ion-content padding class="app-browser">
-  <ion-item>
-            <div class="item item-icon-left" *ngFor="#item of lstUrl" (click)="openUrl(item.url);">
-                <i class="icon ion-ios-world-outline"></i>{{item.title}}
-            </div>
-        </ion-item>
-</ion-content>
+  <ion-list>
+    <ion-item *ngFor="#item of lstUrl" (click)="openUrl(item.url);">
+      <ion-avatar item-left>
+        <img src="{{item.img}}">
+      </ion-avatar>
+      <h2>{{item}}</h2>
+      <p>{{item.url}}</p>
+    </ion-item>
+  </ion-list>
