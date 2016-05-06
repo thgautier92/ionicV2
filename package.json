@@ -19,7 +19,7 @@
     "run-sequence": "1.1.5"
   },
   "name": "ionicv2",
-  "description": "ionicV2: An Ionic project",
+  "description": "ionicV2: An Demonstration of Ionic V2 futures ",
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
@@ -28,15 +28,18 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
     "cordova-plugin-compat",
-    "cordova-plugin-network-information",
+    "cordova-plugin-device-motion",
+    "uk.co.workingedge.phonegap.plugin.launchnavigator",
+    "cordova-plugin-email-composer",
+    "cordova-plugin-image-picker",
+    "cordova-plugin-inappbrowser",
     "cordova-plugin-geolocation",
+    "cordova-plugin-network-information",
     "cordova-plugin-camera",
     "cordova-plugin-actionsheet",
     "cordova-plugin-device-orientation",
-    "cordova-plugin-device-motion",
-    "cordova-plugin-image-picker",
+     "cordova-plugin-device-motion",
     "phonegap-plugin-barcodescanner",
-    "uk.co.workingedge.phonegap.plugin.launchnavigator",
     "com.cordova.plugins.sms",
     "cordova-plugin-inappbrowser",
     "cordova-plugin-email-composer"
@@ -46,16 +49,10 @@
       "platform": "android",
       "locator": "osx"
     },
-    "ios",
     {
       "platform": "ios",
       "version": "",
       "locator": "ios"
-    },
-    {
-      "platform": "windows",
-      "version": "",
-      "locator": "windows"
     }
   ]
 }
