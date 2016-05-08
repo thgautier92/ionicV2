@@ -4,7 +4,8 @@
   <title>Ionic</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+  <meta http-equiv="Content-Security-Policy" content="default-src *; img-src * data:; style-src * data: 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  
   <link ios-href="build/css/app.ios.css" rel="stylesheet">
   <link md-href="build/css/app.md.css" rel="stylesheet">
   <link wp-href="build/css/app.wp.css" rel="stylesheet">  
@@ -12,7 +13,7 @@
 <body>
 
   <ion-app></ion-app>
-
+  
   <!-- cordova.js required for cordova apps -->
   <script src="cordova.js"></script>
   <!-- Polyfill needed for platforms without Promise and Collection support -->

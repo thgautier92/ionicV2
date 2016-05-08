@@ -9,6 +9,7 @@ import * as device from './pages/device/device';
 import * as qrcode from './pages/qr-code/qr-code';
 import * as appBrowser from './pages/app-browser/app-browser';
 import * as email from './pages/email/email';
+import * as maps from './pages/maps/maps';
 
 
 @App({
@@ -37,7 +38,8 @@ class MyApp {
       { title: 'Device', component: device.DevicePage, icon: 'phone-portrait' },
       { title: 'QrCode', component: qrcode.QrCodePage , icon: 'qr-scanner' },
       { title: 'Web', component: appBrowser.AppBrowserPage , icon: 'send' },
-      { title: 'Email', component: email.EmailPage , icon: 'mail' }
+      { title: 'Email', component: email.EmailPage , icon: 'mail' },
+      { title: 'Carte', component: maps.MapsPage , icon: 'locate' }
     ];
   }
 
