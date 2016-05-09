@@ -1,0 +1,20 @@
+<ion-toolbar>
+    <ion-title>
+        Options de la carte
+    </ion-title>
+    <ion-buttons start>
+        <button (click)="dismiss()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+    </ion-buttons>
+</ion-toolbar>
+
+<ion-content>
+    <ion-list>
+        <ion-list-header>Afficher sur la carte</ion-list-header>
+        <ion-item *ngFor="#item of mapOptions">
+            <ion-label> {{item.lib}}</ion-label>
+            <ion-toggle [(ngModel)]="item.display"></ion-toggle>
+        </ion-item>
+    </ion-list>
+</ion-content>

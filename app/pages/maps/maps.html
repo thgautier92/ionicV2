@@ -3,15 +3,33 @@
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
+  
+<ion-menu side="right" type="push" [content]="mapOptions">
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="">Trafic</button>
+      <button ion-item (click)="">Transports</button>
+      <button ion-item (click)="">Pistes Cyclables</button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+  
 -->
 <ion-navbar *navbar>
-    <button menuToggle>
+  <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
+  <ion-buttons end>
+    <button (click)="openOptions()"><ion-icon name="more"></ion-icon></button>
+  </ion-buttons>
   <ion-title>Cartes</ion-title>
 </ion-navbar>
 
 <ion-content padding class="maps">
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchQuery" (search)="searchAddress()"></ion-searchbar>
+  </ion-toolbar>
   <button fab secondary fab-bottom fab-left class="fab-footer front" (click)="centerLoc()"><ion-icon name="locate"></ion-icon></button>
+  <button fab secondary fab-bottom fab-center class="fab-top front" (click)="displayInfo(0)"><ion-icon name="car"></ion-icon></button>
   <div id="map"></div>
 </ion-content>
