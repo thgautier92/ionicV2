@@ -1,11 +1,12 @@
 import {Geolocation} from 'ionic-native';
 import {Injectable} from 'angular2/core';
+
 const gmapKey = 'AIzaSyDsfocxKIufTQdkZ7lXe-bgYThcXF2jkZY'
-const gmapUrl = 'https://maps.googleapis.com/maps/api/js?key=' + gmapKey + '&callback=__onGoogleLoaded'
+const gmapUrl = 'https://maps.googleapis.com/maps/api/js?key=' + gmapKey + '&callback=__onGoogleLoaded&libraries=visualization'
 
 @Injectable()
 export class GoogleAPI {
-  loadAPI: Promise<any>
+  loadAPI: Promise<any>;
   map: any;
   optionsGeoLoc: any;
   defaultLoc: any;
@@ -23,6 +24,7 @@ export class GoogleAPI {
     this.optionsGeoLoc = { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true };
     this.defaultLoc = { lat: 48.8534100, lng: 2.3488000 };
   }
+  // Maps methods
   loadScript() {
     console.log('gloader : loading Google API...')
     let node = document.createElement('script');
@@ -35,6 +37,15 @@ export class GoogleAPI {
       return map;
     });
   }
+  createMap(elId) {
+    return new Promise((resolve) => {
+      var ville = new window['google'].maps.LatLng(this.defaultLoc.lat, this.defaultLoc.lng);
+      var mapOptions = { zoom: 7, center: ville }
+      var mapId = new window['google'].maps.Map(document.getElementById(elId), mapOptions);
+      //console.log("Map created : ", mapId);
+      resolve(mapId);
+    });
+  }
   geoLocation() {
     return new Promise((resolve) => {
       Geolocation.getCurrentPosition(this.optionsGeoLoc).then((resp) => {
@@ -45,7 +56,6 @@ export class GoogleAPI {
         this.currentLoc = this.defaultLoc;
         resolve(this.currentLoc);
       });
-
     });
   }
   mapCenter(map, pos) {
@@ -79,12 +89,12 @@ export class GoogleAPI {
     marker.setMap(null);
   }
   geoCode(map, address) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       let infowindow = new window['google'].maps.InfoWindow;
       let geocoder = new this.googleApi.maps.Geocoder();
       geocoder.geocode({ 'address': address }, function (results, status) {
         if (status == window['google'].maps.GeocoderStatus.OK) {
-          console.log("Results", results);
+          //console.log("Results", results);
           map.setCenter(results[0].geometry.location);
           var marker = new window['google'].maps.Marker({
             map: map,
@@ -94,18 +104,28 @@ export class GoogleAPI {
           infowindow.open(map, marker);
           resolve(marker);
         } else {
-          alert("Geocode was not successful for the following reason: " + status);
-          resolve(null);
+          //alert("Geocode was not successful for the following reason: " + status);
+          reject(status);
         }
       });
     });
   }
-  getMapInfoDef(){
+  getMapInfoDef() {
     return [
-      { type: "trafic",lib:"Trafic" ,display: false, layer: null },
-      { type: "transit",lib:"Transports" ,display: false, layer: null },
-      { type: "bike",lib:"Pistes Cyclables" ,display: false, layer: null }
+      { type: "trafic", lib: "Trafic", display: false, layer: null },
+      { type: "transit", lib: "Transports", display: false, layer: null },
+      { type: "bike", lib: "Pistes Cyclables", display: false, layer: null }
     ];
+  }
+  getDirectionsDef() {
+    return {
+      travelMode: [
+        { type: window['google'].maps.TravelMode.DRIVING, lib: "Voiture", icon: "car" },
+        { type: window['google'].maps.TravelMode.BICYCLING, lib: "Vélo", icon: "bike" },
+        { type: window['google'].maps.TravelMode.TRANSIT, lib: "Transports", icon: "train" },
+        { type: window['google'].maps.TravelMode.WALKING, lib: "A pied", icon: "" }
+      ]
+    };
   }
   mapInfo(map, infos) {
     return new Promise((resolve) => {
@@ -135,11 +155,19 @@ export class GoogleAPI {
             }
             break;
           case 'bike':
+            if (element.display) {
+              var bikeLayer = new window['google'].maps.BicyclingLayer();
+              bikeLayer.setMap(map);
+              element.layer = bikeLayer;
+            } else {
+              if (element.layer) {
+                element.layer.setMap(null);
+              }
+            }
             break;
         }
       });
       resolve(infos);
     });
   }
-
 }

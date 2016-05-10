@@ -20,7 +20,8 @@
     <ion-icon name="menu"></ion-icon>
   </button>
   <ion-buttons end>
-    <button (click)="openOptions()"><ion-icon name="more"></ion-icon></button>
+    <button end (click)="openDirections()"><ion-icon name="navigate"></ion-icon></button>
+    <button end (click)="openOptions()"><ion-icon name="more"></ion-icon></button>
   </ion-buttons>
   <ion-title>Cartes</ion-title>
 </ion-navbar>
@@ -29,7 +30,7 @@
   <ion-toolbar>
     <ion-searchbar [(ngModel)]="searchQuery" (search)="searchAddress()"></ion-searchbar>
   </ion-toolbar>
-  <button fab secondary fab-bottom fab-left class="fab-footer front" (click)="centerLoc()"><ion-icon name="locate"></ion-icon></button>
-  <button fab secondary fab-bottom fab-center class="fab-top front" (click)="displayInfo(0)"><ion-icon name="car"></ion-icon></button>
+  <button fab large fab-bottom fab-left class="fab-footer front" (click)="centerLoc()"><ion-icon name="locate"></ion-icon></button>
+  <button fab fab-bottom fab-center class="fab-top front" (click)="displayInfo(0)"><ion-icon name="car"></ion-icon></button>
   <div id="map"></div>
 </ion-content>

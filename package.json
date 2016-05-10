@@ -49,10 +49,6 @@
     "cordova-sms-plugin"
   ],
   "cordovaPlatforms": [
-    {
-      "platform": "ios",
-      "version": "",
-      "locator": "ios"
-    }
+    "ios"
   ]
 }

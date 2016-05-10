@@ -23,7 +23,7 @@ export class MapsPage {
       search: "Paris"
     };
     this.searchQuery = this.mapDefault.search;
-    this.mapInfos = gMap.getMapInfoDef();
+    this.mapInfos = this.gMap.getMapInfoDef();
     this.gMap.mapLoad().then((mapApi) => {
       //console.log('Map API Loaded', mapApi);
       this.initMap(mapApi);
@@ -69,6 +69,8 @@ export class MapsPage {
       }
       this.gMap.geoCode(this.map, this.searchQuery).then((marker) => {
         this.markerSearch = marker;
+      }, (reason) => {
+        this.display.displayToast('Aucune correspondance trouvée. Code ' + reason);
       });
     }
   }
@@ -89,6 +91,19 @@ export class MapsPage {
     });
     this.nav.present(modal);
   }
+  openDirections() {
+    //this.nav.push(mapDirectionsPage, this.gMap);
+
+    let modal = Modal.create(mapDirectionsPage, this.gMap);
+    modal.onDismiss(data => {
+      this.mapInfos = data;
+      this.gMap.mapInfo(this.map, this.mapInfos).then((infos) => {
+        this.mapInfos = infos;
+      });
+    });
+    this.nav.present(modal);
+
+  }
 }
 
 
@@ -107,5 +122,53 @@ class mapOptionsPage {
   }
   dismiss() {
     this.viewCtrl.dismiss(this.mapOptions);
+  }
+}
+/* ============================================= 
+*  Map Directions
+*
+*/
+@Page({
+  templateUrl: 'build/pages/maps/mapDirections.html',
+})
+class mapDirectionsPage {
+  mapData: any;
+  dirOptions: any;
+  dir: any;
+  gMap: GoogleAPI;
+  map: any;
+  directionsService: any;
+  directionsDisplay: any;
+  constructor(public platform: Platform, public params: NavParams, public viewCtrl: ViewController) {
+    // console.log(params);
+    this.gMap = this.params.data;
+    this.map = {};
+    this.dirOptions = this.gMap.getDirectionsDef();
+    this.dir = { "origin": "", "destination": "", "travelMode": "DRIVING" };
+    this.directionsService = new window['google'].maps.DirectionsService();
+    let directionsDisplay = new window['google'].maps.DirectionsRenderer();
+  }
+  onPageLoaded() {
+    this.gMap.createMap("mapDirections").then((map) => {
+      this.map = map;
+    });
+  }
+  onPageWillLeave() { }
+  dismiss() {
+    this.viewCtrl.dismiss(this.mapData);
+  }
+  calcRoute() {
+    var request = {
+      origin: this.dir.origin,
+      destination: this.dir.destination,
+      travelMode: window['google'].maps.TravelMode.DRIVING
+    };
+    this.directionsDisplay.setMap(this.map);
+    this.directionsService.route(request, function (result, status) {
+      if (status == window['google'].maps.DirectionsStatus.OK) {
+        console.log(result);
+        this.directionsDisplay.setDirections(result);
+      }
+    });
   }
 }
