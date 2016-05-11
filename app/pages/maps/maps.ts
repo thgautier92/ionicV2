@@ -1,5 +1,6 @@
 import {Platform, Page, Modal, NavController, NavParams, ViewController} from 'ionic-angular';
 import {GoogleAPI} from './gMap'
+import {mapDirectionsPage} from './mapDirections';
 import {DisplayTools} from '../comon/display';
 
 @Page({
@@ -92,8 +93,8 @@ export class MapsPage {
     this.nav.present(modal);
   }
   openDirections() {
-    //this.nav.push(mapDirectionsPage, this.gMap);
-
+    this.nav.push(mapDirectionsPage, this.gMap);
+    /*
     let modal = Modal.create(mapDirectionsPage, this.gMap);
     modal.onDismiss(data => {
       this.mapInfos = data;
@@ -102,7 +103,7 @@ export class MapsPage {
       });
     });
     this.nav.present(modal);
-
+*/
   }
 }
 
@@ -122,53 +123,5 @@ class mapOptionsPage {
   }
   dismiss() {
     this.viewCtrl.dismiss(this.mapOptions);
-  }
-}
-/* ============================================= 
-*  Map Directions
-*
-*/
-@Page({
-  templateUrl: 'build/pages/maps/mapDirections.html',
-})
-class mapDirectionsPage {
-  mapData: any;
-  dirOptions: any;
-  dir: any;
-  gMap: GoogleAPI;
-  map: any;
-  directionsService: any;
-  directionsDisplay: any;
-  constructor(public platform: Platform, public params: NavParams, public viewCtrl: ViewController) {
-    // console.log(params);
-    this.gMap = this.params.data;
-    this.map = {};
-    this.dirOptions = this.gMap.getDirectionsDef();
-    this.dir = { "origin": "", "destination": "", "travelMode": "DRIVING" };
-    this.directionsService = new window['google'].maps.DirectionsService();
-    let directionsDisplay = new window['google'].maps.DirectionsRenderer();
-  }
-  onPageLoaded() {
-    this.gMap.createMap("mapDirections").then((map) => {
-      this.map = map;
-    });
-  }
-  onPageWillLeave() { }
-  dismiss() {
-    this.viewCtrl.dismiss(this.mapData);
-  }
-  calcRoute() {
-    var request = {
-      origin: this.dir.origin,
-      destination: this.dir.destination,
-      travelMode: window['google'].maps.TravelMode.DRIVING
-    };
-    this.directionsDisplay.setMap(this.map);
-    this.directionsService.route(request, function (result, status) {
-      if (status == window['google'].maps.DirectionsStatus.OK) {
-        console.log(result);
-        this.directionsDisplay.setDirections(result);
-      }
-    });
   }
 }

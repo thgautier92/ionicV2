@@ -40,9 +40,18 @@ export class GoogleAPI {
   createMap(elId) {
     return new Promise((resolve) => {
       var ville = new window['google'].maps.LatLng(this.defaultLoc.lat, this.defaultLoc.lng);
-      var mapOptions = { zoom: 7, center: ville }
+      var mapOptions = {
+        zoom: 7, 
+        center: ville, 
+        zoomControl: true,
+        mapTypeControl: true,
+        scaleControl: true,
+        streetViewControl: true,
+        rotateControl: true,
+        mapTypeId: window['google'].maps.MapTypeId.ROADMAP
+      }
       var mapId = new window['google'].maps.Map(document.getElementById(elId), mapOptions);
-      //console.log("Map created : ", mapId);
+      console.log("Map created : ", mapId);
       resolve(mapId);
     });
   }

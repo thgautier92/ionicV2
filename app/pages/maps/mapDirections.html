@@ -1,50 +1,33 @@
-<ion-toolbar>
-    <ion-title>
-        Navigation
-    </ion-title>
+<ion-navbar *navbar>
+    <ion-title>Navigation</ion-title>
     <ion-buttons start>
-        <button (click)="dismiss()">
-      <ion-icon name="close"></ion-icon>
-    </button>
+        <button (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
     </ion-buttons>
-</ion-toolbar>
-<ion-content>
+</ion-navbar>
+<ion-content padding class="maps">
     <ion-toolbar>
         <ion-item>
-            <ion-label>
-                <ion-icon name="locate" (click)="setOriginToCenter()"></ion-icon> Départ</ion-label>
+            <ion-icon name="locate" item-left (click)="setOriginToCenter()"></ion-icon>
+            <ion-label>Départ</ion-label>
             <ion-input type="text" [(ngModel)]="dir.origin" clearInput></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label>
-                <ion-icon name="locate" (click)="setDestinationToCenter()"></ion-icon> Arrivée</ion-label>
+            <ion-icon name="locate" item-left (click)="setDestinationToCenter()"></ion-icon>
+            <ion-label>Arrivée</ion-label>
             <ion-input type="text" [(ngModel)]="dir.destination" clearInput></ion-input>
         </ion-item>
     </ion-toolbar>
     <ion-toolbar>
-        <ion-segment>
-            <ion-segment-button *ngFor="#dir of dirOptions.travelMode" (value)="dir.type" (click)="calcRoute()">{{dir.lib}}</ion-segment-button>
+        <ion-segment [(ngModel)]="dir.travelMode" (change)="calcRoute()">
+            <ion-segment-button *ngFor="#dirType of dirOptions.travelMode" value="{{dirType.type}}">{{dirType.lib}}</ion-segment-button>
         </ion-segment>
     </ion-toolbar>
     <div id="mapDirections"></div>
-    
-    <!--
-        <span>{{map.directionsRenderers[0].directions.routes[0].overview_path.length}} changements de directions</span>
-    <div class="button-bar positive">
-        <a ng-repeat="m in mode" class="button icon icon {{m.icon}}" ng-click="changeMode('{{m.mode}}')">
-            <span class="xsmall wrapword">{{m.duration}}</span>
-        </a>
-    </div>
-    <ng-map class="directions" center="current-location" zoom="14" tilt="45">
-        <traffic-layer></traffic-layer>
-        <info-window position="current-location">
-            <span>Vous êtes ici.</span>
-        </info-window>
-        <directions draggable="true" panel="directions-panel" travel-mode="{{dir.travelMode}}" origin="{{dir.origin}}" destination="{{dir.destination}}">
-        </directions>
-    </ng-map>
-    
-
-    <div id="directions-panel" style="overflow: auto; padding: 0px 5px"></div>
-    -->
+    <ion-list *ngIf="okInstructions">
+        <ion-item>
+            <ion-icon name="compass" item-left></ion-icon>
+            {{directionsInfos.distance.text}} en {{directionsInfos.duration.text}}
+        </ion-item>
+    </ion-list>
+    <div id="mapInstructions" [hidden]="!okInstructions"></div>
 </ion-content>

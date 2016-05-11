@@ -14,7 +14,9 @@ import * as maps from './pages/maps/maps';
 
 @App({
   templateUrl: 'build/app.html',
-  config: {} // http://ionicframework.com/docs/v2/api/config/Config/
+  config: { // http://ionicframework.com/docs/v2/api/config/Config/
+    backButtonText: 'Retour'
+  }
 })
 class MyApp {
   // make HelloIonicPage the root (or first) page
