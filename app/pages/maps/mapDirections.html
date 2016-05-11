@@ -23,11 +23,5 @@
         </ion-segment>
     </ion-toolbar>
     <div id="mapDirections"></div>
-    <ion-list *ngIf="okInstructions">
-        <ion-item>
-            <ion-icon name="compass" item-left></ion-icon>
-            {{directionsInfos.distance.text}} en {{directionsInfos.duration.text}}
-        </ion-item>
-    </ion-list>
-    <div id="mapInstructions" [hidden]="!okInstructions"></div>
+    <div id="mapInstructions"></div>
 </ion-content>

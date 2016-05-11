@@ -61,7 +61,7 @@ export class mapDirectionsPage {
         };
         this.directionsService.route(request, function (result, status) {
             if (status == window['google'].maps.DirectionsStatus.OK) {
-                console.log(result);
+                //console.log(result);
                 me.directionsDisplay.setDirections(result);
                 me.directionsInfos = result.routes[0].legs[0];
                 me.directionsDisplay.setPanel(document.getElementById('mapInstructions'));
