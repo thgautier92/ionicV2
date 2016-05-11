@@ -19,6 +19,7 @@ export class MovieListPage {
   }
 
   searchMovieDB(event, key) {
+    console.log(event,key);
     if (event.target.value.length > 2) {
       this.movieService.searchMovies(event.target.value).subscribe(
         data => { this.movies = data.rows; console.log(data); },
