@@ -11,6 +11,7 @@ import * as appBrowser from './pages/app-browser/app-browser';
 import * as email from './pages/email/email';
 import * as maps from './pages/maps/maps';
 import * as api from './pages/api/api';
+import * as forms from './pages/complex-forms/complex-forms';
 
 
 @App({
@@ -43,7 +44,9 @@ class MyApp {
       { title: 'QrCode', component: qrcode.QrCodePage , icon: 'qr-scanner' },
       { title: 'Web', component: appBrowser.AppBrowserPage , icon: 'send' },
       { title: 'Email', component: email.EmailPage , icon: 'mail' },
-      { title: 'Carte', component: maps.MapsPage , icon: 'locate' }
+      { title: 'Carte', component: maps.MapsPage , icon: 'locate' },
+      { title: 'Formulaires', component: forms.ComplexFormsPage , icon: 'checkbox' }
+      
     ];
   }
 

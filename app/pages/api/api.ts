@@ -1,6 +1,9 @@
 import {Page, NavController} from 'ionic-angular';
-import {CouchDbPage} from './couch-db/couch-db'
-import {DisplayTools} from '../comon/display'
+import {DisplayTools} from '../comon/display';
+import {CouchDbPage} from './couch-db/couch-db';
+import {PouchDbPage} from './pouch-db/pouch-db';
+import {SqlStoragePage} from './sql-storage/sql-storage';
+
 
 /*
   Generated class for the ApiPage page.
@@ -20,6 +23,8 @@ export class ApiPage {
     this.display = display;
     this.items = [
       { 'title': 'CouchDB', 'icon': 'cloud', 'description': "Base NoSQL", 'link': CouchDbPage, 'color': this.display.getRandomColor() },
+      { 'title': 'PouchDB', 'icon': 'cloud-download', 'description': "Base NoSQL locale synchronisée avec CouchDB", 'link': PouchDbPage, 'color': this.display.getRandomColor() },
+      { 'title': 'Sql Storage', 'icon': 'albums', 'description': "Stockage de données locales en mode SQL", 'link': SqlStoragePage, 'color': this.display.getRandomColor() },
 
     ]
   }

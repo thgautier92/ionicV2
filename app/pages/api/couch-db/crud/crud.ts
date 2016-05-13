@@ -32,6 +32,7 @@ export class CrudPage {
     this.doc = {}
   }
   getBases() {
+    console.log("Get Database list");
     this.db.getDabases('_all_dbs').then((result) => {
       // handle result
       console.log("lstBases:", result);
