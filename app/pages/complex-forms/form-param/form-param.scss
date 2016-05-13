@@ -1,3 +1,6 @@
 .form-param {
 
 }
+ion-card.cards-list-forms ion-card-header {
+  color: map-get($colors, primary);
+}

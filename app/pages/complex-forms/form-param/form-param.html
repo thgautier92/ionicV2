@@ -9,17 +9,15 @@
 </ion-navbar>
 
 <ion-content padding class="form-param">
-  <ion-card *ngFor="#form of dataForms | objToArray">
-    <ion-card-header primary>
+  <ion-card *ngFor="#form of dataForms | objToArray" class="cards-list-forms">
+    <ion-card-header>
       {{form.value.id}}. {{form.value.name}} - {{form.value.title}}
     </ion-card-header>
-    <ion-list>
-      <ion-item *ngFor="#field of form.value.fields">
-        <ion-card-content>
-          <ion-row>
-            <ion-col>Groupe : {{field.group}}</ion-col>
-            <ion-col>Titre : {{field.title}}</ion-col>
-          </ion-row>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="#field of form.value.fields">
+          <h4>Groupe : {{field.group}}</h4>
+          <h3>Titre : {{field.title}}</h3>
           <ion-row>
             <ion-col>
               <p>Modèle : {{field.model}}</p>
@@ -30,8 +28,8 @@
               <p>Obligatoire : {{field.required}}</p>
             </ion-col>
           </ion-row>
-        </ion-card-content>
-      </ion-item>
-    </ion-list>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
 </ion-content>

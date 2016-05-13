@@ -4,6 +4,7 @@
             "id": 1,
             "name": "client",
             "title": "client",
+            "icon": "body",
             "fields": [
                 {
                     "group": "Identification",
@@ -231,6 +232,7 @@
             "id": 2,
             "name": "contacts",
             "title": "Contacts",
+            "icon": "body",
             "fields": [
                 {
                     "group": "Personnel",
@@ -328,6 +330,7 @@
             "id": 3,
             "name": "identite",
             "title": "Identité",
+            "icon": "body",
             "fields": [
                 {
                     "group": "Identité",
@@ -479,6 +482,7 @@
             "id": 4,
             "name": "fiscalite",
             "title": "ICS",
+            "icon": "body",
             "fields": [
                 {
                     "group": "Fiscalité",
@@ -652,6 +656,7 @@
             "id": 5,
             "name": "offre2",
             "title": "Offre 2",
+            "icon": "body",
             "fields": [
                 {
                     "group": "Identification",
@@ -689,6 +694,7 @@
             "id": 6,
             "name": "offre3",
             "title": "Offre 3",
+            "icon": "body",
             "fields": [
                 {
                     "group": "Simulateur",
@@ -722,6 +728,7 @@
             "id": 7,
             "name": "docClient",
             "title": "Documents clients",
+            "icon": "body",
             "fields": [
                 {
                     "group": "Action réservé conseiller",

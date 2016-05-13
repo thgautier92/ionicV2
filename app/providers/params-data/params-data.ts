@@ -12,14 +12,12 @@ import 'rxjs/add/operator/map';
 export class Paramsdata {
   dataForm: any = null;
 
-  constructor(public http: Http) {}
-
+  constructor(public http: Http) { }
   loadForm() {
     if (this.dataForm) {
       // already loaded dataForm
       return Promise.resolve(this.dataForm);
     }
-
     // don't have the dataForm yet
     return new Promise(resolve => {
       // We're using Angular Http provider to request the dataForm,
@@ -35,5 +33,19 @@ export class Paramsdata {
         });
     });
   }
+  getForm(id) {
+    console.log("Get form for id", id, this.dataForm)
+    return new Promise(resolve => {
+      this.loadForm().then((data) => {
+        if (data) {
+          if (id > data.forms.length) {
+            id = 0;
+          }
+          resolve(data.forms[id]);
+        } else {
+          resolve(null);
+        }
+      })
+    });
+  }
 }
-
