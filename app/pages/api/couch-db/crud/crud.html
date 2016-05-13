@@ -1,0 +1,41 @@
+<!--
+  Generated template for the CrudPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar *navbar>
+  <ion-title>crud</ion-title>
+  <ion-buttons start>
+    <button royal (click)="getBases()"><ion-icon name="refresh"></ion-icon></button>
+    <button royal (click)="gotoStart(consult.base,consult.range)"><ion-icon name="skip-backward"></ion-icon></button>
+    <button royal (click)="getDocs(consult.base,consult.range)"><ion-icon name="play"></ion-icon></button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content padding class="crud">
+  <ion-list>
+    <ion-item>
+      <ion-label>Base de données</ion-label>
+      <ion-select [(ngModel)]="consult.base" cancelText="Annuler" okText="Ok" (change)="changeDb()">
+        <ion-option value="">== Choisir une base ==</ion-option>
+        <ion-option *ngFor="#b of listBases" [value]="b">{{b}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nb de lignes/pages</ion-label>
+      <ion-select [(ngModel)]="consult.range" cancelText="Annuler" okText="Ok">
+        <ion-option *ngFor="#r of listRange" [value]="r.opt">{{r.lib}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-card>
+    <ion-card-header>{{baseDocs.offset}}/{{baseDocs.total_rows}}</ion-card-header>
+    <ion-list>
+      <button ion-item *ngFor="#item of baseDocs.rows" (click)="getDocId(consult.base,item.id)">
+      {{item.id}}
+      <pre>{{item.doc |json:2}}</pre>
+    </button>
+    </ion-list>
+  </ion-card>
+</ion-content>

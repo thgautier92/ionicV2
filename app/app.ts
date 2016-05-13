@@ -10,6 +10,7 @@ import * as qrcode from './pages/qr-code/qr-code';
 import * as appBrowser from './pages/app-browser/app-browser';
 import * as email from './pages/email/email';
 import * as maps from './pages/maps/maps';
+import * as api from './pages/api/api';
 
 
 @App({
@@ -33,6 +34,7 @@ class MyApp {
     // set our app's pages
     this.pages = [
       { title: 'Home', component: HomePage , icon: 'home' },
+      { title: 'API', component: api.ApiPage , icon: 'apps' },
       { title: 'Http', component: httpDemo.MovieListPage, icon: 'keypad' },
       { title: 'Network', component: networkInfo.networkPage, icon: 'wifi' },
       { title: 'Composants', component: demoPages.DemoPagesPage, icon: 'desktop' },
