@@ -25,3 +25,19 @@ export class binaryData {
     return file
   }
 }
+@Pipe({ name: 'groupBy' })
+export class groupBy implements PipeTransform {
+  transform(collection: any,getter:any): any {
+        var result = {};
+        var prop;
+        for (var elm in collection) {
+          prop = getter(elm);
+
+          if(!result[prop]) {
+            result[prop] = [];
+          }
+          result[prop].push(elm);
+        };
+        return result;
+  }
+}

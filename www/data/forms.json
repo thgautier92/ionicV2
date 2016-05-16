@@ -645,10 +645,13 @@
                     "title": "Simuler",
                     "default": "https://www.labanquepostale.fr/particulier/Outils/simulateurs/diagnostic_retraite.diagretraite.html",
                     "required": false,
-                    "readonly":false,
+                    "readonly": false,
                     "error": "Simulateur indisponible",
                     "type": "url",
-                    "enum": [17600,60000]
+                    "enum": [
+                        17600,
+                        60000
+                    ]
                 }
             ]
         },
@@ -717,15 +720,36 @@
                     "title": "Simuler avec transmission de données",
                     "default": "",
                     "required": false,
-                    "readonly":false,
+                    "readonly": false,
                     "error": "Simulateur indisponible",
                     "type": "urlData",
-                    "enum": [17600,60000]
+                    "enum": [
+                        17600,
+                        60000
+                    ]
                 }
             ]
         },
         {
             "id": 7,
+            "name": "signClient",
+            "title": "Signature",
+            "icon": "body",
+            "fields": [
+                {
+                    "group": "Action réservé conseiller",
+                    "model": "signature_valid",
+                    "title": "Validation de la signature des documents ?",
+                    "default": "",
+                    "required": "false",
+                    "readOnly": "false",
+                    "error": "",
+                    "type": "boolean"
+                }
+            ]
+        },
+        {
+            "id": 8,
             "name": "docClient",
             "title": "Documents clients",
             "icon": "body",
@@ -734,6 +758,31 @@
                     "group": "Action réservé conseiller",
                     "model": "doc_valid",
                     "title": "Validation des documents reçus ?",
+                    "default": "",
+                    "required": "false",
+                    "readOnly": "false",
+                    "error": "",
+                    "type": "boolean"
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "name": "docSmaVie",
+            "title": "Documents SmaVie",
+            "icon": "body",
+            "fields": []
+        },
+        {
+            "id": 10,
+            "name": "adhesion",
+            "title": "Adhesion",
+            "icon": "body",
+            "fields": [
+                {
+                    "group": "Action réservé conseiller",
+                    "model": "adhesion_valid",
+                    "title": "Validation del'adhesion ?",
                     "default": "",
                     "required": "false",
                     "readOnly": "false",

@@ -18,7 +18,7 @@ import {FormInputPage} from './form-input/form-input';
   pipes: [ValuesPipe]
 })
 export class ComplexFormsPage {
-  dataForms: any;
+  dataMenu: any;
   paramsApi: Paramsdata;
   tab1: any;
   tab2: any;
@@ -26,12 +26,13 @@ export class ComplexFormsPage {
   tab4: any;
   constructor(public nav: NavController, paramsApi: Paramsdata) {
     this.paramsApi = paramsApi;
-    this.paramsApi.loadForm().then((result) => {
+    this.paramsApi.loadMenu().then((result) => {
       //console.log("Forms params:", result);
-      this.dataForms = result.forms;
+      this.dataMenu = result;
+      this.paramsApi.initDataForms();
     }, (error) => {
       console.log("Error", error);
-      this.dataForms = null;
+      this.dataMenu = null;
     });
     this.tab1 = Form1Page;
     this.tab2 = Form2Page;
@@ -39,7 +40,7 @@ export class ComplexFormsPage {
     this.tab4 = FormParamPage;
   }
   itemTapped(item) {
-    console.log("Navigation:", item);
-    this.nav.push(FormInputPage, { form: item.value });
+    //console.log("Navigation:", item);
+    this.nav.push(FormInputPage, { menu: item.value });
   }
 }

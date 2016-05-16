@@ -1,4 +1,6 @@
 import {Page, NavController, NavParams} from 'ionic-angular';
+import {groupBy,ValuesPipe} from '../../comon/pipes';
+import { FORM_DIRECTIVES, FormBuilder,  ControlGroup, Validators, AbstractControl } from 'angular2/common';
 import {Paramsdata} from '../../../providers/params-data/params-data';
 /*
   Generated class for the FormInputPage page.
@@ -8,24 +10,39 @@ import {Paramsdata} from '../../../providers/params-data/params-data';
 */
 @Page({
   templateUrl: 'build/pages/complex-forms/form-input/form-input.html',
-  providers: [Paramsdata]
+  providers: [Paramsdata],
+  directives: [FORM_DIRECTIVES],
+  pipes: [groupBy,ValuesPipe]
 })
 export class FormInputPage {
-  selectedForm: any;
+  selectedMenu: any;
+  selectedForm: any = null;
+  selectedFields:any = null;
   titleForm: any;
   paramsApi: Paramsdata;
   constructor(private nav: NavController, navParams: NavParams, paramsApi: Paramsdata) {
     // If we navigated to this page, we will have an item available as a nav param
-    this.selectedForm = navParams.get('form');
+    this.selectedMenu=navParams.get('menu');
+    console.log("Menu selected",this.selectedMenu);
     this.paramsApi = paramsApi;
-
-    console.log(this.selectedForm);
+    this.paramsApi.getForm(this.selectedMenu.form).then((data)=>{
+      //console.log("Form display : ",data);
+      this.selectedForm=data;
+      this.selectedFields=data.fields;
+      this.selectedMenu.status="Started";
+      console.log(this.selectedForm);
+    });
+    
   }
-  goStop() { }
-  goPause() { }
+  goStop() { 
+    this.selectedMenu.status="Hold";
+  }
+  goPause() {
+    this.selectedMenu.status="Pending";
+   }
   goNext() {
+    this.selectedMenu.status="Completed";
     this.paramsApi.getForm(this.selectedForm.id+1).then((data)=>{
-      console.log(data);
       this.selectedForm=data;
     });
 
