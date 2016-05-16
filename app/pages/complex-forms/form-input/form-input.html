@@ -19,16 +19,23 @@
 
 <ion-content padding class="form-input">
   <form name="form_input" class="css-form" novalidate>
-    <div class="row responsive-sm gallery">
-      {{selectedFields}}
-      <!-- *ngFor="#valueForm of selectedFields" -->
-      <div class="col">
+    <ion-row responsive-sm>
+      <ion-col width-33 *ngFor="#key of selectedFields | keys">
         <ion-card>
-          <ion-card-header>{{key}}</ion-card-header>
+          <ion-card-header>{{key.key}}</ion-card-header>
           <ion-list>
-            <ion-item class="item item-icon-left middleList" *ngFor="#item of selectedFields">
-              {{item}}
-              <ion-icon class="fieldIcon" [ngClass]="{
+            <ion-item *ngFor="#item of key.value">
+              <ion-label floating>{{item.title}}</ion-label>
+              <ion-input type="{{item.type}}" name="input_{{item.model}}" [(ngModel)]="item.valueInput" clearInput></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
+<!--
+              <ion-icon item-left class="fieldIcon" [ngClass]="{
                   'ion-android-list' : item.type=='enum',
                   'ion-android-calendar' : item.type=='date',
                   'ion-android-textsms' : item.type=='text',
@@ -38,7 +45,7 @@
                   'ion-android-wifi' : item.type=='url',
                   'ion-connection-bars' : item.type=='urlData'}" (click)="initField(item.model)">
               </ion-icon>
-              <div [ngSwitch]="item.type">
+              <ion-item [ngSwitch]="item.type">
                 <template [ngSwitchWhen]="'enum'">
                   <ion-label>{{item.title}}</ion-label>
                   <ion-select name="input_{{item.model}}" [(ngModel)]="item.valueInput" ng-options="k as v for (k, v) in item.enum" ng-change="" ng-required="item.required"
@@ -63,20 +70,13 @@
                 </template>
                 <template ngSwitchDefault>
                   <ion-label>{{item.title}}</ion-label>
-                  <input type="{{item.type}}" name="input_{{item.model}}" [(ngModel)]="item.valueInput" placeholder="{{item.param}}" ng-required="item.required"
-                    ng-readonly="item.readonly" value="{{item.valueInput}}">
+                  <ion-input type="{{item.type}}" name="input_{{item.model}}" [(ngModel)]="item.valueInput" placeholder="{{item.param}}" ng-required="item.required"
+                    ng-readonly="item.readonly" value="{{item.valueInput}}"></ion-input>
                 </template>
-              </div>
-<!--
+              </ion-item>
+
               <div ng-messages="form_input['input_{{item.model}}'].$error" role="alert">
                 <div ng-message="required">Donnée obligatoire</div>
                 <div ng-message="pattern">Format incorrect</div>
               </div>
 -->
-            </ion-item>
-          </ion-list>
-        </ion-card>
-      </div>
-    </div>
-  </form>
-</ion-content>

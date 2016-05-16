@@ -31,13 +31,23 @@ export class groupBy implements PipeTransform {
         var result = {};
         var prop;
         for (var elm in collection) {
-          prop = getter(elm);
-
+          prop = collection[elm][getter];
+          //console.log("GROUP BY:",collection,elm,getter,prop);
           if(!result[prop]) {
             result[prop] = [];
           }
-          result[prop].push(elm);
+          result[prop].push(collection[elm]);
         };
         return result;
+  }
+}
+@Pipe({name: 'keys'})
+export class KeysPipe implements PipeTransform {
+  transform(value, args:string[]) : any {
+    let keys = [];
+    for (let key in value) {
+      keys.push({key: key, value: value[key]});
+    }
+    return keys;
   }
 }

@@ -1,4 +1,5 @@
 import {Page, NavController} from 'ionic-angular';
+import {DisplayTools} from '../../../comon/display';
 import {CouchDb} from '../../../../providers/couch-db/couch-db';
 /*
   Generated class for the ParamsPage page.
@@ -8,27 +9,33 @@ import {CouchDb} from '../../../../providers/couch-db/couch-db';
 */
 @Page({
   templateUrl: 'build/pages/api/couch-db/params/params.html',
-  providers:[CouchDb]
+  providers:[DisplayTools,CouchDb]
 })
 export class ParamsPage {
   srvInfo: any;
   db:CouchDb;
   params:any;
-  constructor(public nav: NavController, db:CouchDb) {
+  display:DisplayTools;
+  constructor(public nav: NavController, db:CouchDb, display:DisplayTools) {
+    this.display=display;
     this.db = db;
     this.params = db.getParams();
     this.srvInfo = null;
   }
   srvTest() {
     console.log("Test server");
+    let loading = this.display.displayLoading("Appel du serveur en cours");
     this.srvInfo = null;
     this.db.getDabases("").then((result) => {
       // handle result
       console.log("srvInfo:",result);
       this.srvInfo = result;
+      loading.dismiss();
     },(error)=>{
       console.log("Error",error);
+      this.display.displayToast("Erreur :"+JSON.stringify(error));
       this.srvInfo=error;
+      loading.dismiss();
     });
   }
 
