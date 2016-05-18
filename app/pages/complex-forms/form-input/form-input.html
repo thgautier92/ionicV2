@@ -18,7 +18,7 @@
 </ion-navbar>
 
 <ion-content padding class="form-input">
-  <form class="css-form" novalidate>
+  <form (ngSubmit)="onSubmit()" [ngFormModel]="form" class="css-form" [ngClass]="{'form-valid':form.valid,'form-invalid':!form.valid}">
     <ion-row responsive-sm>
       <ion-col width-50 *ngFor="#key of selectedFields | keys">
         <ion-card>
@@ -36,23 +36,25 @@
                   'ion-md-cloud-upload' : field.type=='urlData'}" (click)="initField(item.model)">
               </ion-icon>
               <ion-label stacked>{{field.title}}</ion-label>
-              <ion-input *ngIf="field.type=='number'" type="number" name="input_{{field.model}}" [(ngModel)]="field.valueInput" min="{{field.enum[0]}}"
+              <ion-input *ngIf="field.type=='number'" type="number" ngControl="input_{{field.model}}" name="input_{{field.model}}" [(ngModel)]="field.valueInput" min="{{field.enum[0]}}"
                 max="{{field.enum[1]}}"></ion-input>
-              <ion-input *ngIf="field.type=='text'" type="{{field.type}}" primary name="input_{{field.model}}" [(ngModel)]="field.valueInput"
+              <ion-input *ngIf="field.type=='text'" type="{{field.type}}" primary ngControl="input_{{field.model}}" name="input_{{field.model}}" [(ngModel)]="field.valueInput" [required]="field.required"
                 clearInput></ion-input>
-              <ion-input *ngIf="field.type=='date'" type="{{field.type}}" primary name="input_{{field.model}}" [(ngModel)]="field.valueInput"
+              <ion-input *ngIf="field.type=='date'" type="{{field.type}}" primary ngControl="input_{{field.model}}" name="input_{{field.model}}" [(ngModel)]="field.valueInput"
                 clearInput></ion-input>
-              <ion-input *ngIf="field.type=='tel'" type="{{field.type}}" primary name="input_{{field.model}}" [(ngModel)]="field.valueInput"
+              <ion-input *ngIf="field.type=='tel'" type="{{field.type}}" primary ngControl="input_{{field.model}}" name="input_{{field.model}}" [(ngModel)]="field.valueInput"
                 clearInput></ion-input>
-              <ion-input *ngIf="field.type=='email'" type="{{field.type}}" primary name="input_{{field.model}}" [(ngModel)]="field.valueInput"
+              <ion-input *ngIf="field.type=='email'" type="{{field.type}}" ngControl="input_{{field.model}}" primary name="input_{{field.model}}" [(ngModel)]="field.valueInput"
                 clearInput></ion-input>
               <button *ngIf="field.type=='url'" ng-click="openSimu(item.default)"><ion-icon name="wifi"></ion-icon> {{item.title}}</button>
               <button *ngIf="field.type=='urlData'" ng-click="openSimuData($index,item.model,item.default)"><ion-icon name="connection-bars"></ion-icon> {{item.title}}</button>
-              <ion-toggle *ngIf="field.type=='boolean'" checked="false" name="input_{{field.model}}" [(ngModel)]="field.valueInput"></ion-toggle>
+              <ion-toggle *ngIf="field.type=='boolean'" checked="false" ngControl="input_{{field.model}}" name="input_{{field.model}}" [(ngModel)]="field.valueInput"></ion-toggle>
               <ion-select *ngIf="field.type=='enum'" [(ngModel)]="field.valueInput" cancelText="Annuler" okText="Ok">
                 <ion-option value="">== Choisir une option ==</ion-option>
                 <ion-option *ngFor="#b of field.enum | objToArray" [value]="b.key">{{b.value}}</ion-option>
               </ion-select>
+              <div hidden="form_input.controls['input_{{field.model}}'].valid || form_input.controls['input_{{field.model}}'].pristine" class="alert alert-danger">field is required</div>
+          
             </ion-item>
           </ion-list>
         </ion-card>

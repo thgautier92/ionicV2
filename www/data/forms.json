@@ -239,7 +239,7 @@
                     "model": "email_perso",
                     "title": "Email personnel",
                     "default": "",
-                    "required": "false",
+                    "required": "true",
                     "readOnly": "false",
                     "error": "Veuillez vérifier la zone : 'Email personnel'",
                     "type": "email"

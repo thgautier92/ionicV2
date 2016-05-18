@@ -1,0 +1,31 @@
+<template [ngIf]="column.visible">
+      <div class="pure-control-group">
+        <span [ngSwitch]="htmlElementType">
+           <template [ngSwitchWhen]="'input'">
+             <label [attr.for]="column.name">{{column.display}}</label>
+             <input id="column.name" [attr.type]="computeInputSubType()" [(ngModel)]="rowData[column.name]" 
+                [attr.placeholder]="column.display"> {{rowData[column.name]}}
+           </template>
+<template [ngSwitchWhen]="'checkbox'">
+             <div class="pure-controls">
+              <label for="column.name" class="pure-checkbox">
+                  <input id="column.name" type="checkbox" [(ngModel)]="rowData[column.name]"> Toggle and see the change {{rowData[column.name]}}
+              </label>
+            </div>
+           </template>
+<template [ngSwitchWhen]="'option'">
+              <label [attr.for]="column.name">{{column.display}}</label>
+              <select [(ngModel)]="rowData[column.name]">
+                  <option *ngFor="#key of column.values" [value]="key">{{key}}</option>
+              </select>{{rowData[column.name]}}
+           </template>
+<template ngSwitchDefault>
+                   <span>Oops! This control type is unknown. Contact the creator</span>
+            </template>
+</span>
+</div>
+</template>
+<template [ngIf]="!column.visible ">
+      There is a hidden control here because the column is set to invisible 
+      <input type="hidden" [(ngModel)]="rowData[column.name]/>
+  </template>

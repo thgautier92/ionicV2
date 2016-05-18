@@ -12,6 +12,7 @@ import * as email from './pages/email/email';
 import * as maps from './pages/maps/maps';
 import * as api from './pages/api/api';
 import * as forms from './pages/complex-forms/complex-forms';
+import * as formDynamic from './pages/form-dynamic/form-dynamic';
 
 
 @App({
@@ -45,7 +46,8 @@ class MyApp {
       { title: 'Web', component: appBrowser.AppBrowserPage , icon: 'send' },
       { title: 'Email', component: email.EmailPage , icon: 'mail' },
       { title: 'Carte', component: maps.MapsPage , icon: 'locate' },
-      { title: 'Formulaires', component: forms.ComplexFormsPage , icon: 'checkbox' }
+      { title: 'Formulaires', component: forms.ComplexFormsPage , icon: 'checkbox' },
+      { title: 'Form Dynamic', component: formDynamic.FormDynamicPage , icon: 'checkbox' }
       
     ];
   }

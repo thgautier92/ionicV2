@@ -1,0 +1,32 @@
+<!--
+  Generated template for the FormDynamicPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Formulaire Dynamic</ion-title>
+</ion-navbar>
+
+<ion-content padding class="form-dynamic">
+  <div class="pure-g">
+    <div class="pure-u-1-1">
+      <form [ngFormModel]='form' class="pure-form pure-form-aligned">
+        <fieldset>
+          <df-question *ngFor="#t of columns" [column]="t" [row-data]="data"></df-question>
+          <div class="pure-controls">
+            <button type="submit" class="pure-button pure-button-primary">Submit</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div class="pure-u-1-1">
+      <p>
+        As of now this does not change. We need it to change
+        <br><pre>{{dataString()}}</pre></p>
+    </div>
+  </div>
+</ion-content>
