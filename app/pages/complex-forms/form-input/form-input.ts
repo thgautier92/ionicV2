@@ -1,10 +1,8 @@
 import {Page, NavController, NavParams} from 'ionic-angular';
 import {groupBy, ValuesPipe, KeysPipe} from '../../comon/pipes';
-import { FORM_DIRECTIVES, 
-  FormBuilder, ControlGroup, Validators, AbstractControl,
-  NgSwitch,
-  NgSwitchWhen,
-  NgSwitchDefault } from 'angular2/common';
+import { FORM_DIRECTIVES,
+  NgForm,FormBuilder, ControlGroup, Validators, AbstractControl,
+  NgSwitch, NgSwitchWhen, NgSwitchDefault } from 'angular2/common';
 import {Paramsdata} from '../../../providers/params-data/params-data';
 /*
   Generated class for the FormInputPage page.
@@ -15,7 +13,7 @@ import {Paramsdata} from '../../../providers/params-data/params-data';
 @Page({
   templateUrl: 'build/pages/complex-forms/form-input/form-input.html',
   providers: [Paramsdata],
-  directives: [FORM_DIRECTIVES,NgSwitch, NgSwitchWhen, NgSwitchDefault],
+  directives: [FORM_DIRECTIVES, NgSwitch, NgSwitchWhen, NgSwitchDefault],
   pipes: [groupBy, ValuesPipe, KeysPipe]
 })
 export class FormInputPage {
@@ -48,7 +46,11 @@ export class FormInputPage {
     this.selectedMenu.status = "Completed";
     this.paramsApi.getForm(this.selectedForm.id + 1).then((data) => {
       this.selectedForm = data;
+      this.selectedFields = new groupBy().transform(data['fields'], 'group');
+      this.selectedMenu.status = "Started";
     });
-
+  }
+  initField(model) {
+    
   }
 }

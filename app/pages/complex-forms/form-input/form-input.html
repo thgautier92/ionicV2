@@ -18,15 +18,41 @@
 </ion-navbar>
 
 <ion-content padding class="form-input">
-  <form name="form_input" class="css-form" novalidate>
+  <form class="css-form" novalidate>
     <ion-row responsive-sm>
-      <ion-col width-33 *ngFor="#key of selectedFields | keys">
+      <ion-col width-50 *ngFor="#key of selectedFields | keys">
         <ion-card>
           <ion-card-header>{{key.key}}</ion-card-header>
           <ion-list>
-            <ion-item *ngFor="#item of key.value">
-              <ion-label floating>{{item.title}}</ion-label>
-              <ion-input type="{{item.type}}" name="input_{{item.model}}" [(ngModel)]="item.valueInput" clearInput></ion-input>
+            <ion-item *ngFor="#field of key.value">
+              <ion-icon item-left class="fieldIcon" [ngClass]="{
+                  'ion-md-list' : field.type=='enum',
+                  'ion-md-calendar' : field.type=='date',
+                  'ion-md-text' : field.type=='text',
+                  'ion-md-calculator' : field.type=='number',
+                  'iion-md-call': field.type=='tel',
+                  'ion-md-mail' : field.type=='email',
+                  'ion-md-wifi' : field.type=='url',
+                  'ion-md-cloud-upload' : field.type=='urlData'}" (click)="initField(item.model)">
+              </ion-icon>
+              <ion-label stacked>{{field.title}}</ion-label>
+              <ion-input *ngIf="field.type=='number'" type="number" name="input_{{field.model}}" [(ngModel)]="field.valueInput" min="{{field.enum[0]}}"
+                max="{{field.enum[1]}}"></ion-input>
+              <ion-input *ngIf="field.type=='text'" type="{{field.type}}" primary name="input_{{field.model}}" [(ngModel)]="field.valueInput"
+                clearInput></ion-input>
+              <ion-input *ngIf="field.type=='date'" type="{{field.type}}" primary name="input_{{field.model}}" [(ngModel)]="field.valueInput"
+                clearInput></ion-input>
+              <ion-input *ngIf="field.type=='tel'" type="{{field.type}}" primary name="input_{{field.model}}" [(ngModel)]="field.valueInput"
+                clearInput></ion-input>
+              <ion-input *ngIf="field.type=='email'" type="{{field.type}}" primary name="input_{{field.model}}" [(ngModel)]="field.valueInput"
+                clearInput></ion-input>
+              <button *ngIf="field.type=='url'" ng-click="openSimu(item.default)"><ion-icon name="wifi"></ion-icon> {{item.title}}</button>
+              <button *ngIf="field.type=='urlData'" ng-click="openSimuData($index,item.model,item.default)"><ion-icon name="connection-bars"></ion-icon> {{item.title}}</button>
+              <ion-toggle *ngIf="field.type=='boolean'" checked="false" name="input_{{field.model}}" [(ngModel)]="field.valueInput"></ion-toggle>
+              <ion-select *ngIf="field.type=='enum'" [(ngModel)]="field.valueInput" cancelText="Annuler" okText="Ok">
+                <ion-option value="">== Choisir une option ==</ion-option>
+                <ion-option *ngFor="#b of field.enum | objToArray" [value]="b.key">{{b.value}}</ion-option>
+              </ion-select>
             </ion-item>
           </ion-list>
         </ion-card>
@@ -35,6 +61,20 @@
   </form>
 </ion-content>
 <!--
+    <ion-label floating>{{field.title}} {{field.type}}</ion-label>
+              <div [ngSwitch]="field.type">
+                <p *ngSwitchWhen="'number'">Number</p>
+                <p *ngSwitchWhen="'text'">Texte</p>
+                <p *ngSwitchDefault>Default</p>
+              </div>
+  
+  
+  
+  <ion-label floating>{{field.title}} {{field.type}}</ion-label>
+  <span [ngSwitch]="field.type">
+                <ion-input *ngSwitchWhen="'number'" type="number" name="input_{{field.model}}" [(ngModel)]="field.valueInput" min="{{field.enum[0]}}" max="{{field.enum[1]}}"></ion-input>
+                <ion-input *ngSwitchDefault type="{{field.type}}" name="input_{{field.model}}" [(ngModel)]="field.valueInput" clearInput></ion-input>
+              <span>
               <ion-icon item-left class="fieldIcon" [ngClass]="{
                   'ion-android-list' : item.type=='enum',
                   'ion-android-calendar' : item.type=='date',
