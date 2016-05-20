@@ -1,5 +1,6 @@
-import {Page, Platform, NavController, Storage, SqlStorage} from 'ionic-angular';
+import {Page, Modal, Platform, NavController, NavParams, ViewController, Storage, SqlStorage} from 'ionic-angular';
 import {DisplayTools} from '../../../comon/display';
+
 
 declare var PouchDB: any;
 /*
@@ -26,42 +27,49 @@ export class PouchSynchroPage {
   constructor(public nav: NavController, platform: Platform, display: DisplayTools) {
     this.platform = platform;
     this.display = display;
-    this.sync = { "start": false, "info": false, "error": false };
     this.docs = [];
     this.params = {};
     this.store = new Storage(SqlStorage);
+    this.loadBase();
+
+  }
+  loadBase() {
+    this.sync = { "start": false, "info": false, "error": false, "stats": false, "timer": false };
     this.store.get("pouchParam").then((data) => {
       let par = JSON.parse(data);
       if (par) {
         this.params = par;
         this.db = new PouchDB(this.params.base, { adapter: 'websql', iosDatabaseLocation: 'default' });
         this.remoteCouch = 'http://' + this.params.user + ':' + this.params.password + '@' + this.params.srv + '/' + this.params.base;
+        this.docs = [];
       } else {
         this.display.displayAlert("Paramètre incorrect. Veuillez les vérifier sur l'onglet");
       }
     });
   }
   showBase() {
-    let me=this;
+    let me = this;
+    me.docs = [];
     this.db.allDocs({ include_docs: true, descending: true }, function (err, data) {
-      console.log(err, data);
-      me.docs = data.rows;
-      console.log("==> Refresh list", data);
+      me.docs = data;
+      //console.log("==> Refresh list", data);
     });
   };
   // ===== Sync opérations =====
   startSync() {
     console.log("Start Sync");
-    let me=this;
+    let me = this;
     this.sync.start = true;
+    this.sync.info = false;
     this.sync.error = false;
-    var opts = { live: true };
+    this.sync.stats = false;
+    this.sync.timer = false;
+    var opts = { live: false, retry: true };
     this.syncExec = PouchDB.sync(this.db, this.remoteCouch, opts)
       .on('change', function (info) {
         // handle change
-        //console.log(info);
         me.sync.info = info;
-        me.showBase();
+        //me.showBase();
       })
       .on('error', function (err) {
         console.log(err);
@@ -69,9 +77,15 @@ export class PouchSynchroPage {
       })
       .on('complete', function (info) {
         // handle complete
-        //console.log(info);
-        me.sync.info = info;
+        console.log("Sync completed : ", info);
+        me.sync.stats = info;
+        me.sync.start = false;
+        me.sync.timer = {
+          "pull": (info.pull.end_time - info.pull.start_time),
+          "push": (info.push.end_time - info.push.start_time)
+        };
         me.showBase();
+        me.openModal();
       }).on('paused', function (err) {
         // replication paused (e.g. replication up to date, user went offline)
       }).on('active', function () {
@@ -85,12 +99,35 @@ export class PouchSynchroPage {
     this.sync.start = false;
     console.log("End Sync");
   };
+  getSyncDetail(){
+    this.openModal();
+  }
   delDb() {
+    let me = this;
     this.db.destroy().then(function (response) {
-      // success
-      console.log(response);
+      console.log("Del DB", response);
+      me.display.displayToast("Base effacée en local.");
+      me.loadBase();
     }).catch(function (err) {
       console.log(err);
     });
+  }
+  openModal() {
+    let modal = Modal.create(statSynchroModal, { infos: this.sync.stats });
+    this.nav.present(modal);
+  }
+}
+// Modal for displaying sync results
+@Page({
+  templateUrl: "build/pages/api/pouch-db/pouch-synchro/pouch-stats.html"
+})
+class statSynchroModal {
+  infos: any;
+  constructor(public platform: Platform, public params: NavParams, public viewCtrl: ViewController) {
+    this.viewCtrl = viewCtrl;
+    this.infos = this.params.get('infos');
+  }
+  close() {
+    this.viewCtrl.dismiss();
   }
 }

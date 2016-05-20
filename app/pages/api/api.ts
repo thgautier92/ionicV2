@@ -22,10 +22,9 @@ export class ApiPage {
     this.nav = nav;
     this.display = display;
     this.items = [
-      { 'title': 'CouchDB', 'icon': 'cloud', 'description': "Base NoSQL", 'link': CouchDbPage, 'color': this.display.getRandomColor() },
-      { 'title': 'PouchDB', 'icon': 'cloud-download', 'description': "Base NoSQL locale synchronisée avec CouchDB", 'link': PouchDbPage, 'color': this.display.getRandomColor() },
+      { 'title': 'CouchDB', 'icon': 'cloud', 'description': "Stockage NoSQL", 'link': CouchDbPage, 'color': this.display.getRandomColor() },
+      { 'title': 'PouchDB', 'icon': 'cloud-download', 'description': "Stockage NoSQL local synchronisé avec CouchDB", 'link': PouchDbPage, 'color': this.display.getRandomColor() },
       { 'title': 'Sql Storage', 'icon': 'albums', 'description': "Stockage de données locales en mode SQL", 'link': SqlStoragePage, 'color': this.display.getRandomColor() },
-
     ]
   }
   openNavDetailsPage(item) {

@@ -51,7 +51,11 @@ export class CouchDb {
           resolve(this.dataBases);
         }, error => {
           console.log("PROVIDER : Request error", error);
-          reject(JSON.parse(error._body));
+          if (typeof (error._body) === "string") {
+            resolve(JSON.parse(error._body));
+          } else {
+            resolve({ error: "Erreur de connexion", reason: "Le site n'est pas accessible" });
+          }
         });
     });
   }
@@ -92,7 +96,7 @@ export class CouchDb {
           this.dataBases = data;
           resolve(this.dataBases);
         }, error => {
-          console.log("Request error");
+          console.log("Request error", error);
           resolve(JSON.parse(error._body));
         });
     })

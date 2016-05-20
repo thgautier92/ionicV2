@@ -1,6 +1,5 @@
 import {Page, NavController} from 'ionic-angular';
 import {CrudPage} from './crud/crud';
-import {SynchroPage} from './synchro/synchro';
 import {ParamsPage} from './params/params';
 /*
   Generated class for the CouchDbPage page.
@@ -17,7 +16,6 @@ export class CouchDbPage {
   tab3:any;
   constructor(public nav: NavController) {
     this.tab1 = CrudPage;
-    this.tab2 = SynchroPage;
     this.tab3 = ParamsPage;
   }
 }
