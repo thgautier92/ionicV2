@@ -39,7 +39,7 @@ export class MotionPage {
       
     });
   }
-  stoptWatch() {
+  stopWatch() {
     // Stop watch
     this.subscription.unsubscribe();
     this.record=false;

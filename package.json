@@ -38,7 +38,6 @@
     "cordova-plugin-device-motion",
     "cordova-plugin-camera",
     "phonegap-plugin-barcodescanner",
-    "cordova-plugin-image-picker",
     "com.cordova.plugins.sms",
     "cordova-plugin-device@~1.1.2",
     "cordova-plugin-console@~1.0.3",
@@ -46,7 +45,8 @@
     "cordova-plugin-splashscreen@~3.2.2",
     "cordova-plugin-statusbar@~2.1.3",
     "ionic-plugin-keyboard@~2.0.1",
-    "cordova-sms-plugin"
+    "cordova-sms-plugin",
+    "cordova-plugin-image-picker"
   ],
   "cordovaPlatforms": [
     "ios"
