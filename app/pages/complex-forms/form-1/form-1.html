@@ -5,9 +5,20 @@
   Ionic pages and navigation.
 -->
 <ion-navbar *navbar>
-  <ion-title>form1</ion-title>
+  <ion-title>Formulaires complexes</ion-title>
 </ion-navbar>
 
 <ion-content padding class="form-1">
-  
+  <ion-list>
+    <button ion-item *ngFor="#item of dataMenu | objToArray" (click)="itemTapped(item)">
+      <ion-icon [name]="item.value.icon" [ngStyle]="{'color': item.value.color}" item-left></ion-icon>
+      <h5>{{item.value.lib}} {{item.value.status}}</h5>
+      <ion-icon item-right name="checkbox" [ngClass]="{
+          'Completed': item.value.status == 'Completed',
+          'Hold': item.value.status == 'Hold' , 
+          'Started': item.value.status == 'Started', 
+          'Pending': item.value.status == 'Pending'} ">
+        </ion-icon>
+    </button>
+  </ion-list>
 </ion-content>

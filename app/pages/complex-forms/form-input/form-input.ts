@@ -1,7 +1,7 @@
 import {Page, NavController, NavParams} from 'ionic-angular';
 import {groupBy, ValuesPipe, KeysPipe} from '../../comon/pipes';
 import { FORM_DIRECTIVES,
-  NgForm,FormBuilder, ControlGroup, Validators, AbstractControl,
+  NgForm,FormBuilder, Control, ControlGroup, Validators, AbstractControl,
   NgSwitch, NgSwitchWhen, NgSwitchDefault } from 'angular2/common';
 import {Paramsdata} from '../../../providers/params-data/params-data';
 /*
@@ -32,19 +32,17 @@ export class FormInputPage {
     this.paramsApi = paramsApi;
     this.fb=fb;
     this.form=this.fb.group({});
-    this.paramsApi.getForm(this.selectedMenu.form).then((data) => {
-      this.selectedForm = data;
-      this.selectedFields = new groupBy().transform(data['fields'], 'group');
+    this.loadForm(this.selectedMenu['form']);
+  }
+  loadForm(id) {
+    this.paramsApi.getForm(id).then((data) => {
+      console.log("Get form data ",id,data);
+      this.selectedForm = data['form'];
+      this.form=data['formGroup'];
+      // Group fields array
+      this.selectedFields = new groupBy().transform(this.selectedForm['fields'], 'group');
       this.selectedMenu.status = "Started";
-      console.log("Form Fields, grouped", this.selectedFields);
-      // Create Control group for the form
-      let group = {};
-      data['fields'].forEach(question => {
-        group['input_'+question.model] = question.required ? [question.value || '', Validators.required] : [question.value || ''];
-      });
-      this.form=this.fb.group(group);
     });
-
   }
   goStop() {
     this.selectedMenu.status = "Hold";
@@ -55,21 +53,12 @@ export class FormInputPage {
   }
   goNext() {
     this.selectedMenu.status = "Completed";
-    this.form=this.fb.group({});
-    this.paramsApi.getForm(this.selectedForm.id + 1).then((data) => {
-      this.selectedForm = data;
-      this.selectedFields = new groupBy().transform(data['fields'], 'group');
-      this.selectedMenu.status = "Started";
-      // Create Control group for the form
-      let group = {};
-      data['fields'].forEach(question => {
-        group['input_'+question.model] = question.required ? [question.value || '', Validators.required] : [question.value || ''];
-      });
-      this.form=this.fb.group(group);
-    });
+    this.loadForm(this.selectedForm.id + 1);
   }
   initField(model) {
     
   }
   onSubmit(){}
 }
+
+
