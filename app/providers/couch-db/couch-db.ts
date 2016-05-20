@@ -18,21 +18,26 @@ export class CouchDb {
   constructor(public http: Http) {
     this.credHeaders = new Headers();
     this.credHeaders.append('Content-Type', 'application/json');
-    this.credHeaders.append('Authorization', 'Basic ' + window.btoa(defaultParams.user + ':' + defaultParams.password));
     this.credHeaders.append('Accept', 'application/json;charset=utf-8');
+    this.credHeaders.append('Authorization', 'Basic ' + window.btoa(defaultParams.user + ':' + defaultParams.password))
   }
 
   getParams() {
     return defaultParams;
   }
-  getDabases(key) {
+  getDabases(key, params) {
+    /*
     if (this.dataBases) {
-      // already loaded data
       return Promise.resolve(this.dataBases);
     }
-    // don't have the data yet
-    return new Promise(resolve => {
-      var rootUrl = 'http://' + defaultParams.srv + '/' + key;
+    */
+    return new Promise((resolve, reject) => {
+      if (!params) params = defaultParams;
+      console.log("HTTP Params :", params);
+      var rootUrl = 'http://' + params.srv + '/' + key;
+      this.credHeaders.delete('Authorization');
+      this.credHeaders.append('Authorization', 'Basic ' + window.btoa(params.user + ':' + params.password))
+      console.log("HTTP Hearder :", this.credHeaders);
       var options = new Request({
         method: RequestMethod.Get,
         headers: this.credHeaders,
@@ -45,8 +50,8 @@ export class CouchDb {
           this.dataBases = data;
           resolve(this.dataBases);
         }, error => {
-          console.log("Request error");
-          resolve(JSON.parse(error._body));
+          console.log("PROVIDER : Request error", error);
+          reject(JSON.parse(error._body));
         });
     });
   }

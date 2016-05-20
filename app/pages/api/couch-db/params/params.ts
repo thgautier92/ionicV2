@@ -26,14 +26,13 @@ export class ParamsPage {
     console.log("Test server");
     let loading = this.display.displayLoading("Appel du serveur en cours");
     this.srvInfo = null;
-    this.db.getDabases("").then((result) => {
+    this.db.getDabases("",this.params).then((result) => {
       // handle result
       console.log("srvInfo:",result);
       this.srvInfo = result;
       loading.dismiss();
     },(error)=>{
-      console.log("Error",error);
-      this.display.displayToast("Erreur :"+JSON.stringify(error));
+      this.display.displayToast("Erreur de connexion au serveur");
       this.srvInfo=error;
       loading.dismiss();
     });

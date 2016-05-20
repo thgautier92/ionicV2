@@ -6,33 +6,12 @@
 -->
 <ion-navbar *navbar>
   <ion-title>pouchDB</ion-title>
-  <ion-buttons end>
-    <button clear (click)="showTodos(null)">Refresh</button>
-    <button clear (click)="addTodo('nouveau text')">Add</button>
-  </ion-buttons>
 </ion-navbar>
 
 <ion-content padding class="pouch-db">
-  <ion-refresher (refresh)="showTodos($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  <ion-list>
-    <ion-list-header>{{count}} records</ion-list-header>
-    <ion-item-sliding *ngFor="#item of rows | objToArray">
-      <ion-item>
-        {{item.value.id}}.
-        <pre>{{item.value.doc | json}}</pre>
-      </ion-item>
-      <ion-item-options>
-        <button danger (click)="delRecord(item.value.id)">
-        <ion-icon name="trash"></ion-icon>
-        Suppr
-      </button>
-        <button secondary>
-        <ion-icon name="call"></ion-icon>
-        Call
-      </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+  <ion-tabs>
+    <ion-tab tabIcon="albums" tabTitle="Synchro" [root]="tab1"></ion-tab>
+    <ion-tab tabIcon="analytics" tabTitle="Edition" [root]="tab2"></ion-tab>
+    <ion-tab tabIcon="cog" tabTitle="Paramètres" [root]="tab3"></ion-tab>
+  </ion-tabs>
 </ion-content>
