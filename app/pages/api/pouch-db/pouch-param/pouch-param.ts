@@ -1,4 +1,4 @@
-import {Page, Platform, Storage, SqlStorage, NavController} from 'ionic-angular';
+import {Page, Platform, NavController, Storage, SqlStorage, LocalStorage} from 'ionic-angular';
 import {DisplayTools} from '../../../comon/display';
 import {CouchDb} from '../../../../providers/couch-db/couch-db';
 
@@ -24,7 +24,7 @@ export class PouchParamPage {
     this.db = db;
     this.display = display;
     this.params = { srv: "gautiersa.fr:81", base: "", user: "", password: "" };
-    this.store = new Storage(SqlStorage);
+    this.store = new Storage(LocalStorage);
     this.store.get("pouchParam").then((data) => {
       let par = JSON.parse(data);
       if (par) this.params = par;

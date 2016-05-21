@@ -1,4 +1,5 @@
-import {Page, Modal, Platform, NavController, NavParams, ViewController, Storage, SqlStorage} from 'ionic-angular';
+import {Page, Modal, Platform, NavController, NavParams, ViewController, 
+  Storage, SqlStorage,LocalStorage} from 'ionic-angular';
 import {DisplayTools} from '../../../comon/display';
 
 
@@ -29,7 +30,7 @@ export class PouchSynchroPage {
     this.display = display;
     this.docs = [];
     this.params = {};
-    this.store = new Storage(SqlStorage);
+    this.store = new Storage(LocalStorage);
     this.loadBase();
 
   }
