@@ -40,7 +40,7 @@ export class PouchSynchroPage {
       let par = JSON.parse(data);
       if (par) {
         this.params = par;
-        this.db = new PouchDB(this.params.base, { adapter: 'websql', iosDatabaseLocation: 'default' });
+        this.db = new PouchDB(this.params.base);
         this.remoteCouch = 'http://' + this.params.user + ':' + this.params.password + '@' + this.params.srv + '/' + this.params.base;
         this.docs = [];
       } else {

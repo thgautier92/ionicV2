@@ -3,6 +3,7 @@ import {ValuesPipe} from '../../comon/pipes';
 import {PouchSynchroPage} from './pouch-synchro/pouch-synchro';
 import {PouchEditPage} from './pouch-edit/pouch-edit';
 import {PouchParamPage} from './pouch-param/pouch-param';
+
 declare var PouchDB: any;
 /*
   Generated class for the PouchDbPage page.
@@ -24,3 +25,4 @@ export class PouchDbPage {
     this.tab3 = PouchParamPage;
   }
 }
+
