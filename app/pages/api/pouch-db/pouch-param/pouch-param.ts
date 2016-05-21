@@ -1,4 +1,5 @@
 import {Page, Platform, NavController, Storage, SqlStorage, LocalStorage} from 'ionic-angular';
+import {Output, EventEmitter} from 'angular2/core'
 import {DisplayTools} from '../../../comon/display';
 import {CouchDb} from '../../../../providers/couch-db/couch-db';
 
@@ -13,11 +14,12 @@ import {CouchDb} from '../../../../providers/couch-db/couch-db';
   providers: [DisplayTools, CouchDb]
 })
 export class PouchParamPage {
+  @Output() paramsChange: EventEmitter<any> = new EventEmitter();
   platform: any;
   srvInfo: any;
   store: Storage;
-  db: CouchDb;
   params: any;
+  db: CouchDb;
   display: DisplayTools;
   constructor(public nav: NavController, db: CouchDb, platform: Platform, display: DisplayTools) {
     this.platform = platform;
@@ -39,6 +41,7 @@ export class PouchParamPage {
       this.srvInfo = result;
       this.store.set("pouchParam", JSON.stringify(this.params));
       loading.dismiss();
+      this.paramsChange.emit(this.params);
     }, (error) => {
       this.srvInfo = error;
       this.display.displayToast(error.error + ":" + error.reason);

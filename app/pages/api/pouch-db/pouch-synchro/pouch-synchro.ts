@@ -1,7 +1,7 @@
 import {Page, Modal, Platform, NavController, NavParams, ViewController, 
   Storage, SqlStorage,LocalStorage} from 'ionic-angular';
 import {DisplayTools} from '../../../comon/display';
-
+import {PouchParamPage} from '../pouch-param/pouch-param';  
 
 declare var PouchDB: any;
 /*
@@ -32,13 +32,14 @@ export class PouchSynchroPage {
     this.params = {};
     this.store = new Storage(LocalStorage);
     this.loadBase();
-
   }
+    
   loadBase() {
     this.sync = { "start": false, "info": false, "error": false, "stats": false, "timer": false };
     this.store.get("pouchParam").then((data) => {
       let par = JSON.parse(data);
       if (par) {
+        let d=this.display.displayLoading("Activation de la base "+par.base)
         this.params = par;
         this.db = new PouchDB(this.params.base);
         this.remoteCouch = 'http://' + this.params.user + ':' + this.params.password + '@' + this.params.srv + '/' + this.params.base;
@@ -75,6 +76,7 @@ export class PouchSynchroPage {
       .on('error', function (err) {
         console.log(err);
         me.sync.error = err
+        me.display.displayAlert(err);
       })
       .on('complete', function (info) {
         // handle complete
@@ -89,10 +91,13 @@ export class PouchSynchroPage {
         me.openModal();
       }).on('paused', function (err) {
         // replication paused (e.g. replication up to date, user went offline)
+        me.display.displayToast("Synchronisation en pause");
       }).on('active', function () {
         // replicate resumed (e.g. new changes replicating, user went back online)
+        me.display.displayToast("Synchronisation active");
       }).on('denied', function (err) {
         // a document failed to replicate (e.g. due to permissions)
+        me.display.displayAlert("Synchronisation refusée");
       });
   };
   cancelSync() {
@@ -118,7 +123,7 @@ export class PouchSynchroPage {
     this.nav.present(modal);
   }
 }
-// Modal for displaying sync results
+// ========== Modal for displaying sync results ==========
 @Page({
   templateUrl: "build/pages/api/pouch-db/pouch-synchro/pouch-stats.html"
 })
