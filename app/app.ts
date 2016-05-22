@@ -1,6 +1,7 @@
 import {App, IonicApp, Platform, MenuController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from './pages/home/home';
+
 import * as demoPages from './pages/demo-pages/demo-pages';
 import * as httpDemo from './pages/httpRequest/httpRequest';
 import * as networkInfo from './pages/network/network';
@@ -19,7 +20,7 @@ import * as formDynamic from './pages/form-dynamic/form-dynamic';
   templateUrl: 'build/app.html',
   config: { // http://ionicframework.com/docs/v2/api/config/Config/
     backButtonText: 'Retour'
-  }
+  },
 })
 class MyApp {
   // make HelloIonicPage the root (or first) page
@@ -47,8 +48,7 @@ class MyApp {
       { title: 'Email', component: email.EmailPage , icon: 'mail' },
       { title: 'Carte', component: maps.MapsPage , icon: 'locate' },
       { title: 'Formulaires', component: forms.ComplexFormsPage , icon: 'checkbox' },
-      { title: 'Form Dynamic', component: formDynamic.FormDynamicPage , icon: 'checkbox' }
-      
+      { title: 'Form Dynamic', component: formDynamic.FormDynamicPage , icon: 'checkbox' }  
     ];
   }
 

@@ -5,10 +5,9 @@
   Ionic pages and navigation.
 -->
 <ion-navbar>
-  <ion-title *ngIf="selectedForm">
-    <ion-icon [name]="selectedForm.icon">
-      {{selectedForm.title}}
-    </ion-icon>
+  <ion-title  [hidden]="!selectedForm">
+    <ion-icon [name]="selectedForm.icon"></ion-icon>
+    {{selectedForm.title}}
   </ion-title>
   <ion-buttons end>
     <button royal (click)="goStop()"><ion-icon name="square"></ion-icon></button>
@@ -36,24 +35,27 @@
                   'ion-md-cloud-upload' : field.type=='urlData'}" (click)="initField(item.model)">
               </ion-icon>
               <ion-label stacked>{{field.title}}</ion-label>
-              <ion-input *ngIf="field.type=='number'" type="number" ngControl="input_{{field.model}}" name="input_{{field.model}}" [(ngModel)]="field.value" min="{{field.enum[0]}}"
+              <ion-input *ngIf="field.type=='number'" type="number" [ngControl]="field.model" name="input_{{field.model}}" [(ngModel)]="field.value" min="{{field.enum[0]}}"
                 max="{{field.enum[1]}}"></ion-input>
-              <ion-input *ngIf="field.type=='text'" type="{{field.type}}" primary ngControl="input_{{field.model}}" name="input_{{field.model}}" [(ngModel)]="field.value" [required]="field.required"
+              <ion-input *ngIf="field.type=='text'" type="{{field.type}}" primary [ngControl]="field.model" name="input_{{field.model}}" [(ngModel)]="field.value" [required]="field.required"
                 clearInput></ion-input>
-              <ion-input *ngIf="field.type=='date'" type="{{field.type}}" primary ngControl="input_{{field.model}}" name="input_{{field.model}}" [(ngModel)]="field.value"
+              <ion-input *ngIf="field.type=='date'" type="{{field.type}}" primary [ngControl]="field.model" name="input_{{field.model}}" [(ngModel)]="field.value"
                 clearInput></ion-input>
-              <ion-input *ngIf="field.type=='tel'" type="{{field.type}}" primary ngControl="input_{{field.model}}" name="input_{{field.model}}" [(ngModel)]="field.value"
+              <ion-input *ngIf="field.type=='tel'" type="{{field.type}}" primary [ngControl]="field.model" name="input_{{field.model}}" [(ngModel)]="field.value"
                 clearInput></ion-input>
-              <ion-input *ngIf="field.type=='email'" type="{{field.type}}" ngControl="input_{{field.model}}" primary name="input_{{field.model}}" [(ngModel)]="field.value"
+              <ion-input *ngIf="field.type=='email'" type="{{field.type}}" [ngControl]="field.model" primary name="input_{{field.model}}" [(ngModel)]="field.value"
                 clearInput></ion-input>
               <button *ngIf="field.type=='url'" ng-click="openSimu(item.default)"><ion-icon name="wifi"></ion-icon> {{field.title}}</button>
               <button *ngIf="field.type=='urlData'" ng-click="openSimuData($index,item.model,item.default)"><ion-icon name="connection-bars"></ion-icon> {{field.title}}</button>
-              <ion-toggle *ngIf="field.type=='boolean'" checked="false" ngControl="input_{{field.model}}" name="input_{{field.model}}" [(ngModel)]="field.value"></ion-toggle>
-              <ion-select *ngIf="field.type=='enum'" [(ngModel)]="field.value" cancelText="Annuler" okText="Ok">
+             
+              <ion-toggle *ngIf="field.type=='boolean'" checked="false" [ngControl]="field.model" name="input_{{field.model}}" [(ngModel)]="field.value"></ion-toggle>
+             
+              <ion-select *ngIf="field.type=='enum'" [(ngModel)]="field.value" [ngControl]="field.model" cancelText="Annuler" okText="Ok">
                 <ion-option value="">== Choisir une option ==</ion-option>
                 <ion-option *ngFor="#b of field.enum | objToArray" [value]="b.key">{{b.value}}</ion-option>
               </ion-select>
-              <div hidden="form_input.controls['input_{{field.model}}'].valid || form_input.controls['input_{{field.model}}'].pristine" class="alert alert-danger">field is required</div>
+              <!--<div class="errorMessage" *ngIf="isValid(field.model)">{{field.title}} is required</div> -->
+           
           
             </ion-item>
           </ion-list>

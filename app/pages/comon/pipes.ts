@@ -1,12 +1,12 @@
 import {Pipe, PipeTransform} from 'angular2/core';
 
-@Pipe({ name: 'objToArray',  pure: false })
+@Pipe({ name: 'objToArray', pure: false })
 export class ValuesPipe implements PipeTransform {
   transform(dict: Object): any {
     var a = [];
     for (var key in dict) {
       if (dict.hasOwnProperty(key)) {
-        a.push({key: key, value: dict[key]});
+        a.push({ key: key, value: dict[key] });
         //console.log(key,dict[key]);
       }
     }
@@ -27,26 +27,26 @@ export class binaryData {
 }
 @Pipe({ name: 'groupBy' })
 export class groupBy implements PipeTransform {
-  transform(collection: any,getter:any): any {
-        var result = {};
-        var prop;
-        for (var elm in collection) {
-          prop = collection[elm][getter];
-          //console.log("GROUP BY:",collection,elm,getter,prop);
-          if(!result[prop]) {
-            result[prop] = [];
-          }
-          result[prop].push(collection[elm]);
-        };
-        return result;
+  transform(collection: any, getter: any): any {
+    var result = {};
+    var prop;
+    for (var elm in collection) {
+      prop = collection[elm][getter];
+      //console.log("GROUP BY:",collection,elm,getter,prop);
+      if (!result[prop]) {
+        result[prop] = [];
+      }
+      result[prop].push(collection[elm]);
+    };
+    return result;
   }
 }
-@Pipe({name: 'keys'})
+@Pipe({ name: 'keys' })
 export class KeysPipe implements PipeTransform {
-  transform(value, args:string[]) : any {
+  transform(value, args: string[]): any {
     let keys = [];
     for (let key in value) {
-      keys.push({key: key, value: value[key]});
+      keys.push({ key: key, value: value[key] });
     }
     return keys;
   }

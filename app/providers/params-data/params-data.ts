@@ -89,11 +89,12 @@ export class Paramsdata {
           // Generate a Form Builder Group
           let group = {};
           form[0]['fields'].forEach(question => {
-            question.value='aa';
+            question.value='';
             let lstValidator=[];
+            //lstValidator.push(question.value || '');
             if (question.required) lstValidator.push(Validators.required);
             if (question.type=='email') lstValidator.push(GlobalValidator.mailFormat);
-            group['input_' + question.model] = lstValidator;
+            group[question.model] = lstValidator;
             //group['input_' + question.model] = question.required ? [question.value || '', Validators.required] : [question.value || ''];
           });
           ret['formGroup']=this.fb.group(group);

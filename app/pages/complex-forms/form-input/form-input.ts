@@ -1,7 +1,7 @@
 import {Page, NavController, NavParams} from 'ionic-angular';
 import {groupBy, ValuesPipe, KeysPipe} from '../../comon/pipes';
 import { FORM_DIRECTIVES,
-  NgForm,FormBuilder, Control, ControlGroup, Validators, AbstractControl,
+  NgForm, FormBuilder, Control, ControlGroup, Validators, AbstractControl,
   NgSwitch, NgSwitchWhen, NgSwitchDefault } from 'angular2/common';
 import {Paramsdata} from '../../../providers/params-data/params-data';
 /*
@@ -23,26 +23,31 @@ export class FormInputPage {
   titleForm: any;
   paramsApi: Paramsdata;
   myForm: ControlGroup;
-  form:ControlGroup;
-  fb:FormBuilder;
-  constructor(private nav: NavController, navParams: NavParams, paramsApi: Paramsdata, fb:FormBuilder) {
+  form: ControlGroup;
+  fb: FormBuilder;
+  constructor(private nav: NavController, navParams: NavParams, paramsApi: Paramsdata, fb: FormBuilder) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedMenu = navParams.get('menu');
     console.log("Menu selected", this.selectedMenu);
     this.paramsApi = paramsApi;
-    this.fb=fb;
-    this.form=this.fb.group({});
+    this.fb = fb;
+    this.form = this.fb.group({});
+    this.selectedForm=false;
     this.loadForm(this.selectedMenu['form']);
   }
   loadForm(id) {
     this.paramsApi.getForm(id).then((data) => {
-      console.log("Get form data ",id,data);
+      console.log("Get form data ", id, data);
       this.selectedForm = data['form'];
-      this.form=data['formGroup'];
+      this.form = data['formGroup'];
       // Group fields array
       this.selectedFields = new groupBy().transform(this.selectedForm['fields'], 'group');
       this.selectedMenu.status = "Started";
     });
+  }
+
+  isValid(keyField): Boolean {
+    return this.form.controls[keyField].valid;
   }
   goStop() {
     this.selectedMenu.status = "Hold";
@@ -56,9 +61,9 @@ export class FormInputPage {
     this.loadForm(this.selectedForm.id + 1);
   }
   initField(model) {
-    
+
   }
-  onSubmit(){}
+  onSubmit() { }
 }
 
 

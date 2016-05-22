@@ -1,7 +1,7 @@
-import {Page, Modal, Platform, NavController, NavParams, ViewController, 
-  Storage, SqlStorage,LocalStorage} from 'ionic-angular';
+import {Page, Loading, Modal, Platform, NavController, NavParams, ViewController,
+  Storage, SqlStorage, LocalStorage} from 'ionic-angular';
 import {DisplayTools} from '../../../comon/display';
-import {PouchParamPage} from '../pouch-param/pouch-param';  
+import {PouchParamPage} from '../pouch-param/pouch-param';
 
 declare var PouchDB: any;
 /*
@@ -33,13 +33,13 @@ export class PouchSynchroPage {
     this.store = new Storage(LocalStorage);
     this.loadBase();
   }
-    
+
   loadBase() {
     this.sync = { "start": false, "info": false, "error": false, "stats": false, "timer": false };
     this.store.get("pouchParam").then((data) => {
       let par = JSON.parse(data);
       if (par) {
-        let d=this.display.displayLoading("Activation de la base "+par.base)
+        this.display.displayLoading("Activation de la base " + par.base,1);
         this.params = par;
         this.db = new PouchDB(this.params.base);
         this.remoteCouch = 'http://' + this.params.user + ':' + this.params.password + '@' + this.params.srv + '/' + this.params.base;
@@ -47,8 +47,9 @@ export class PouchSynchroPage {
       } else {
         this.display.displayAlert("Paramètre incorrect. Veuillez les vérifier sur l'onglet");
       }
-    });
-  }
+    }, error =>{});
+  };
+
   showBase() {
     let me = this;
     me.docs = [];
@@ -87,8 +88,8 @@ export class PouchSynchroPage {
           "pull": (info.pull.end_time - info.pull.start_time),
           "push": (info.push.end_time - info.push.start_time)
         };
-        me.showBase();
         me.openModal();
+        me.showBase();
       }).on('paused', function (err) {
         // replication paused (e.g. replication up to date, user went offline)
         me.display.displayToast("Synchronisation en pause");
@@ -105,7 +106,7 @@ export class PouchSynchroPage {
     this.sync.start = false;
     console.log("End Sync");
   };
-  getSyncDetail(){
+  getSyncDetail() {
     this.openModal();
   }
   delDb() {

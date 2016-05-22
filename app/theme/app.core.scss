@@ -8,6 +8,8 @@
 // App Shared Sass variables belong in app.variables.scss.
 
 @import "../pages/home/home";
+@import "../components/loading-modal/loading-modal";
+
 
 @import "../pages/demo-pages/item-details/item-details";
 @import "../pages/demo-pages/demo-pages.scss";
