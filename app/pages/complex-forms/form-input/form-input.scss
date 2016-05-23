@@ -10,19 +10,19 @@
     cursor:progress;
 }
 /* Forms control */
-.css-form input.ng-invalid {
-	background-color: #F6CECE;
-    border-botom: 0px solid darkred;
+.css-form ion-input.ng-invalid {
+	background-color: #F6CECE; 
+    border-bottom: 0px solid darkred;
 }
-.css-form input.ng-valid {
+.css-form ion-input.ng-valid {
 	background-color: #A9F5D0;
     border-left: 0px solid green;
 }
-.css-form select.ng-invalid {
+.css-form ion-select.ng-invalid {
 	background-color: #F6CECE;
     border-bottom: 0px solid darkred;
 }
-.css-form select.ng-valid {
+.css-form ion-select.ng-valid {
 	background-color: #A9F5D0;
     border-bottom: 0px solid green;
 }

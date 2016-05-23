@@ -32,7 +32,7 @@ export class FormInputPage {
     this.paramsApi = paramsApi;
     this.fb = fb;
     this.form = this.fb.group({});
-    this.selectedForm=false;
+    this.selectedForm = false;
     this.loadForm(this.selectedMenu['form']);
   }
   loadForm(id) {
@@ -57,6 +57,22 @@ export class FormInputPage {
     console.log(this.form);
   }
   goNext() {
+    console.log("Save data form", this.form.controls);
+    let dForm = [];
+    for (var key in this.form.controls) {
+      let question = this.form.controls[key];
+      console.log("Save input",question);
+      dForm.push({
+        form:this.selectedForm.id,
+        field:key,
+        error: question['_errors'],
+        pristine: question['_pristine'],
+        status: question['_status'],
+        touched: question['_touched'],
+        value: question['_value']
+      });
+    }
+    this.paramsApi.storeDataForms(this.selectedForm.id, dForm);
     this.selectedMenu.status = "Completed";
     this.loadForm(this.selectedForm.id + 1);
   }

@@ -19,7 +19,7 @@
 <ion-content padding class="form-input">
   <form (ngSubmit)="onSubmit()" [ngFormModel]="form" class="css-form">
     <ion-row responsive-sm>
-      <ion-col width-50 *ngFor="#key of selectedFields | keys">
+      <ion-col width-33 *ngFor="#key of selectedFields | keys">
         <ion-card>
           <ion-card-header>{{key.key}}</ion-card-header>
           <ion-list>
@@ -54,7 +54,7 @@
                 <ion-option value="">== Choisir une option ==</ion-option>
                 <ion-option *ngFor="#b of field.enum | objToArray" [value]="b.key">{{b.value}}</ion-option>
               </ion-select>
-              <!--<div class="errorMessage" *ngIf="isValid(field.model)">{{field.title}} is required</div> -->
+              <div class="errorMessage" *ngIf="isValid(field.model)">{{field.title}} is required</div> -->
            
           
             </ion-item>

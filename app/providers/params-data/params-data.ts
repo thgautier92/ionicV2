@@ -32,6 +32,7 @@ export class Paramsdata {
     this.local = new Storage(LocalStorage);
     this.keyStore = "dataForms";
     this.fb=fb;
+    this.dataForms=[];
   }
   loadMenu() {
     if (this.dataMenu) {
@@ -91,9 +92,9 @@ export class Paramsdata {
           form[0]['fields'].forEach(question => {
             question.value='';
             let lstValidator=[];
-            //lstValidator.push(question.value || '');
+            lstValidator.push(question.value || '');
             if (question.required) lstValidator.push(Validators.required);
-            if (question.type=='email') lstValidator.push(GlobalValidator.mailFormat);
+            if (question.type=='email') lstValidator.push(ValidationService.emailValidator);
             group[question.model] = lstValidator;
             //group['input_' + question.model] = question.required ? [question.value || '', Validators.required] : [question.value || ''];
           });
@@ -109,7 +110,7 @@ export class Paramsdata {
   * Methods for data store during forms input
   */
   initDataForms() {
-    this.dataForms = { ts: new Date() };
+    this.dataForms[0]={ ts: new Date()};
     this.local.set(this.keyStore, JSON.stringify(this.dataForms));
   }
   storeDataForms(id, data) {
@@ -134,4 +135,44 @@ export class GlobalValidator{
 }
 interface ValidationResult {
     [key: string]: boolean;
+}
+export class ValidationService {
+
+  static getValidatorErrorMessage(code: string) {
+    let config = {
+      'required': 'Required',
+      'invalidCreditCard': 'Is invalid credit card number',
+      'invalidEmailAddress': 'Invalid email address',
+      'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.'
+    };
+    return config[code];
+  }
+
+  static creditCardValidator(control:any) {
+    // Visa, MasterCard, American Express, Diners Club, Discover, JCB
+    if (control.value.match(/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/)) {
+      return null;
+    } else {
+      return { 'invalidCreditCard': true };
+    }
+  }
+     
+  static emailValidator(control:any) {
+    // RFC 2822 compliant regex
+    if (control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) {
+      return null;
+    } else {
+        return { 'invalidEmailAddress': true };
+      }
+    }
+     
+   static passwordValidator(control:any) {
+     // {6,100}           - Assert password is between 6 and 100 characters
+     // (?=.*[0-9])       - Assert a string has at least one number
+     if (control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$/)) {
+       return null;
+     } else {
+       return { 'invalidPassword': true };
+     }
+  }
 }

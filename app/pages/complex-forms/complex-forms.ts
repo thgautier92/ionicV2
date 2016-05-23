@@ -29,6 +29,8 @@ export class ComplexFormsPage {
     this.tab2 = Form2Page;
     this.tab3 = Form3Page;
     this.tab4 = FormParamPage;
+    this.paramsApi=paramsApi;
+    this.paramsApi.initDataForms();
   }
   
 }
