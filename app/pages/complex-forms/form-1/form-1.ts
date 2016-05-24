@@ -17,6 +17,7 @@ import {FormInputPage} from '../form-input/form-input';
 })
 export class Form1Page {
   dataMenu: any;
+  store: Storage;
   paramsApi: Paramsdata;
   constructor(public nav: NavController, paramsApi: Paramsdata) {
     this.paramsApi = paramsApi;

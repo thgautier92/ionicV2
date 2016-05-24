@@ -27,11 +27,12 @@ export class binaryData {
 }
 @Pipe({ name: 'groupBy' })
 export class groupBy implements PipeTransform {
-  transform(collection: any, getter: any): any {
+  transform(collection: any, getter: any,subgetter?:any): any {
     var result = {};
     var prop;
     for (var elm in collection) {
       prop = collection[elm][getter];
+      if(subgetter) prop=prop[subgetter];
       //console.log("GROUP BY:",collection,elm,getter,prop);
       if (!result[prop]) {
         result[prop] = [];

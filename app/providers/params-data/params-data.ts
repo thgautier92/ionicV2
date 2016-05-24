@@ -2,8 +2,8 @@ import {Storage, LocalStorage} from 'ionic-angular';
 import {Injectable, Pipe, PipeTransform} from 'angular2/core';
 import {Http} from 'angular2/http';
 import 'rxjs/add/operator/map';
-import { FORM_DIRECTIVES, FormBuilder,Control, ControlGroup, Validators,AbstractControl } from 'angular2/common';
-const mailFormat='/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i';
+import { FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators, AbstractControl } from 'angular2/common';
+const mailFormat = '/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i';
 /*
   Generated class for the ParamsparamsForm provider.
 
@@ -27,12 +27,12 @@ export class Paramsdata {
   paramsForm: any = null;
   dataMenu: any = null;
   dataForms: any = null;
-  fb:FormBuilder;
-  constructor(public http: Http, fb:FormBuilder) {
+  fb: FormBuilder;
+  constructor(public http: Http, fb: FormBuilder) {
     this.local = new Storage(LocalStorage);
     this.keyStore = "dataForms";
-    this.fb=fb;
-    this.dataForms=[];
+    this.fb = fb;
+    this.dataForms = [];
   }
   loadMenu() {
     if (this.dataMenu) {
@@ -74,15 +74,14 @@ export class Paramsdata {
         });
     });
   }
-  getForm(id) {
-    console.log("Get form for id", id, this.paramsForm)
+  getForm(id, dataInput?) {
+    console.log("Get form for id", id, this.paramsForm, dataInput)
     return new Promise(resolve => {
       this.loadForm().then((data) => {
-        //console.log("List forms:",data);
         if (data) {
           let ret = {};
           let form = data.forms.filter(item => item.id === id);
-          console.log("Form find", form);
+          let formModel = data.dataToForm;
           if (form.length == 0) {
             form = data.forms.filter(item => item.id === 1);
           }
@@ -90,15 +89,19 @@ export class Paramsdata {
           // Generate a Form Builder Group
           let group = {};
           form[0]['fields'].forEach(question => {
-            question.value='';
-            let lstValidator=[];
+            // Get default value from dataInput, params in Form
+            let model = formModel.filter(item => item.field === question.model);
+            let modelValue = model.length > 0 ? dataInput['doc'][model[0].dataSource] : '';
+            question.value = modelValue;
+     
+            // Generate validators
+            let lstValidator = [];
             lstValidator.push(question.value || '');
             if (question.required) lstValidator.push(Validators.required);
-            if (question.type=='email') lstValidator.push(ValidationService.emailValidator);
+            if (question.type == 'email') lstValidator.push(ValidationService.emailValidator);
             group[question.model] = lstValidator;
-            //group['input_' + question.model] = question.required ? [question.value || '', Validators.required] : [question.value || ''];
           });
-          ret['formGroup']=this.fb.group(group);
+          ret['formGroup'] = this.fb.group(group);
           resolve(ret);
         } else {
           resolve(null);
@@ -110,7 +113,7 @@ export class Paramsdata {
   * Methods for data store during forms input
   */
   initDataForms() {
-    this.dataForms[0]={ ts: new Date()};
+    this.dataForms[0] = { ts: new Date() };
     this.local.set(this.keyStore, JSON.stringify(this.dataForms));
   }
   storeDataForms(id, data) {
@@ -124,17 +127,17 @@ export class Paramsdata {
 
 
 // Specific validator for input
-export class GlobalValidator{
-    static mailFormat(control: Control): ValidationResult {
-        var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
-        if (control.value != "" && (control.value.length <= 5 || !EMAIL_REGEXP.test(control.value))) {
-            return { "incorrectMailFormat": true };
-        }
-        return null;
+export class GlobalValidator {
+  static mailFormat(control: Control): ValidationResult {
+    var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+    if (control.value != "" && (control.value.length <= 5 || !EMAIL_REGEXP.test(control.value))) {
+      return { "incorrectMailFormat": true };
     }
+    return null;
+  }
 }
 interface ValidationResult {
-    [key: string]: boolean;
+  [key: string]: boolean;
 }
 export class ValidationService {
 
@@ -148,7 +151,7 @@ export class ValidationService {
     return config[code];
   }
 
-  static creditCardValidator(control:any) {
+  static creditCardValidator(control: any) {
     // Visa, MasterCard, American Express, Diners Club, Discover, JCB
     if (control.value.match(/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/)) {
       return null;
@@ -156,23 +159,23 @@ export class ValidationService {
       return { 'invalidCreditCard': true };
     }
   }
-     
-  static emailValidator(control:any) {
+
+  static emailValidator(control: any) {
     // RFC 2822 compliant regex
     if (control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) {
       return null;
     } else {
-        return { 'invalidEmailAddress': true };
-      }
+      return { 'invalidEmailAddress': true };
     }
-     
-   static passwordValidator(control:any) {
-     // {6,100}           - Assert password is between 6 and 100 characters
-     // (?=.*[0-9])       - Assert a string has at least one number
-     if (control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$/)) {
-       return null;
-     } else {
-       return { 'invalidPassword': true };
-     }
+  }
+
+  static passwordValidator(control: any) {
+    // {6,100}           - Assert password is between 6 and 100 characters
+    // (?=.*[0-9])       - Assert a string has at least one number
+    if (control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$/)) {
+      return null;
+    } else {
+      return { 'invalidPassword': true };
+    }
   }
 }

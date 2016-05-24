@@ -12,10 +12,10 @@
 </ion-navbar>
 
 <ion-content padding class="complex-forms">
-  <ion-tabs>
+  <ion-tabs #formsTab>
+    <ion-tab tabIcon="people" tabTitle="Client" [root]="tab3"></ion-tab>
     <ion-tab tabIcon="albums" tabTitle="Formulaires" [root]="tab1"></ion-tab>
     <ion-tab tabIcon="analytics" tabTitle="Données" [root]="tab2"></ion-tab>
-    <ion-tab tabIcon="flame" tabTitle="Fire" [root]="tab3"></ion-tab>
     <ion-tab tabIcon="cog" tabTitle="Paramètres" [root]="tab4"></ion-tab>
   </ion-tabs>
 </ion-content>

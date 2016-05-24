@@ -1,4 +1,4 @@
-import {Page, NavController} from 'ionic-angular';
+import {Page, NavController,Tabs} from 'ionic-angular';
 import {ValuesPipe} from '../comon/pipes';
 import {Paramsdata} from '../../providers/params-data/params-data';
 import {Form1Page} from './form-1/form-1';
@@ -17,6 +17,7 @@ import {FormInputPage} from './form-input/form-input';
   providers: [Paramsdata],
   pipes: [ValuesPipe]
 })
+
 export class ComplexFormsPage {
   dataMenu: any;
   paramsApi: Paramsdata;
@@ -32,5 +33,4 @@ export class ComplexFormsPage {
     this.paramsApi=paramsApi;
     this.paramsApi.initDataForms();
   }
-  
 }
