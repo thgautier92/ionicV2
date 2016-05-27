@@ -93,12 +93,13 @@ export class Paramsdata {
             let model = formModel.filter(item => item.field === question.model);
             let modelValue = model.length > 0 ? dataInput['doc'][model[0].dataSource] : '';
             question.value = modelValue;
-     
+
             // Generate validators
             let lstValidator = [];
             lstValidator.push(question.value || '');
             if (question.required) lstValidator.push(Validators.required);
             if (question.type == 'email') lstValidator.push(ValidationService.emailValidator);
+            if (question.type == 'number') lstValidator.push(ValidationService.numberFormat);
             group[question.model] = lstValidator;
           });
           ret['formGroup'] = this.fb.group(group);
@@ -143,10 +144,11 @@ export class ValidationService {
 
   static getValidatorErrorMessage(code: string) {
     let config = {
-      'required': 'Required',
-      'invalidCreditCard': 'Is invalid credit card number',
-      'invalidEmailAddress': 'Invalid email address',
-      'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.'
+      'required': 'Obligatoire',
+      'invalidCreditCard': 'est un numéro de carte de crédit incorrect',
+      'invalidEmailAddress': 'est une adresse mail invalide',
+      'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',
+      'invalidNumber': 'Ce nombre ne respecte pas les limtes imposées.'
     };
     return config[code];
   }
@@ -159,7 +161,19 @@ export class ValidationService {
       return { 'invalidCreditCard': true };
     }
   }
-
+  static numberFormat(control: Control, numLimit?: Array<number>): ValidationResult {
+    console.log("Bornes : ",numLimit);
+    if (numLimit) {
+      if (control.value < numLimit[0] || control.value > numLimit[1]) {
+        return { "incorrectNumberFormat": true };
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }
+  
   static emailValidator(control: any) {
     // RFC 2822 compliant regex
     if (control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) {
