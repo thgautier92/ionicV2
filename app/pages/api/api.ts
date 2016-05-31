@@ -3,6 +3,7 @@ import {DisplayTools} from '../comon/display';
 import {CouchDbPage} from './couch-db/couch-db';
 import {PouchDbPage} from './pouch-db/pouch-db';
 import {SqlStoragePage} from './sql-storage/sql-storage';
+import {MfpApiPage} from './mfp-api/mfp-api';
 
 
 /*
@@ -25,6 +26,7 @@ export class ApiPage {
       { 'title': 'CouchDB', 'icon': 'cloud', 'description': "Stockage NoSQL", 'link': CouchDbPage, 'color': this.display.getRandomColor() },
       { 'title': 'PouchDB', 'icon': 'cloud-download', 'description': "Stockage NoSQL local synchronisé avec CouchDB", 'link': PouchDbPage, 'color': this.display.getRandomColor() },
       { 'title': 'Sql Storage', 'icon': 'albums', 'description': "Stockage de données locales en mode SQL", 'link': SqlStoragePage, 'color': this.display.getRandomColor() },
+      { 'title': 'Mobile First', 'icon': 'albums', 'description': "Api Mobile First", 'link': MfpApiPage, 'color': this.display.getRandomColor() },
     ]
   }
   openNavDetailsPage(item) {
