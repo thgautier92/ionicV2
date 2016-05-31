@@ -1,5 +1,6 @@
 import {Page, NavController} from 'ionic-angular';
-
+declare var WL: any;
+declare var WLAuthorizationManager:any; 
 /*
   Generated class for the ExplorePage page.
 
@@ -11,4 +12,12 @@ import {Page, NavController} from 'ionic-angular';
 })
 export class ExplorePage {
   constructor(public nav: NavController) {}
+  getToken() {
+    WLAuthorizationManager.obtainAccessToken().then(function(token) {
+        alert("success: "+JSON.stringify(token))
+    },function(error) {
+        alert("failure: "+JSON.stringify(error))
+    });
+};
 }
+
