@@ -67,9 +67,9 @@
         </mfp:windows10>
         <mfp:appChecksum>0</mfp:appChecksum>
     </mfp:windows>
-    <mfp:platformVersion />
+    <mfp:platformVersion>8.0.0.00-20160328-0234</mfp:platformVersion>
     <mfp:clientCustomInit enabled="false" />
-    <mfp:server runtime="mfp" url="http://10.0.0.1:9080" />
+    <mfp:server runtime="mfp" url="http://gautiersa.fr:8080" />
     <mfp:directUpdateAuthenticityPublicKey />
-    <mfp:languagePreferences>en</mfp:languagePreferences>
+    <mfp:languagePreferences>fr</mfp:languagePreferences>
 </widget>

@@ -1,5 +1,6 @@
 import {App, IonicApp, Platform, MenuController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
+import {Renderer} from 'angular2/core'
 import {HomePage} from './pages/home/home';
 
 import * as demoPages from './pages/demo-pages/demo-pages';
@@ -15,6 +16,7 @@ import * as api from './pages/api/api';
 import * as forms from './pages/complex-forms/complex-forms';
 import * as formDynamic from './pages/form-dynamic/form-dynamic';
 
+declare var WL: any; 
 
 @App({
   templateUrl: 'build/app.html',
@@ -22,44 +24,54 @@ import * as formDynamic from './pages/form-dynamic/form-dynamic';
     backButtonText: 'Retour'
   },
 })
+
+
 class MyApp {
   // make HelloIonicPage the root (or first) page
   rootPage: any = HomePage;
-  pages: Array<{title: string, component: any, icon: string}>;
+  pages: Array<{ title: string, component: any, icon: string }>;
+  env: any;
 
   constructor(
     private app: IonicApp,
     private platform: Platform,
-    private menu: MenuController
+    private menu: MenuController,
+    renderer: Renderer
   ) {
-    this.initializeApp();
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      StatusBar.styleDefault();
 
+    });
+    renderer.listenGlobal('document', 'wlInitFinished', () => {
+      console.log('MFP => wlInitFinished event received');
+      console.log("MFP => Env:", WL.Client.getEnvironment());
+      this.env = WL.Client.getEnvironment();
+      this.MFPInit();
+    })
+    this.initializeApp();
     // set our app's pages
     this.pages = [
-      { title: 'Home', component: HomePage , icon: 'home' },
-      { title: 'API', component: api.ApiPage , icon: 'apps' },
+      { title: 'Home', component: HomePage, icon: 'home' },
+      { title: 'API', component: api.ApiPage, icon: 'apps' },
       { title: 'Http', component: httpDemo.MovieListPage, icon: 'keypad' },
       { title: 'Network', component: networkInfo.networkPage, icon: 'wifi' },
       { title: 'Composants', component: demoPages.DemoPagesPage, icon: 'desktop' },
       { title: 'Media', component: media.MediaPage, icon: 'images' },
       { title: 'Device', component: device.DevicePage, icon: 'phone-portrait' },
-      { title: 'QrCode', component: qrcode.QrCodePage , icon: 'qr-scanner' },
-      { title: 'Web', component: appBrowser.AppBrowserPage , icon: 'send' },
-      { title: 'Email', component: email.EmailPage , icon: 'mail' },
-      { title: 'Carte', component: maps.MapsPage , icon: 'locate' },
-      { title: 'Formulaires', component: forms.ComplexFormsPage , icon: 'checkbox' },
-      { title: 'Form Dynamic', component: formDynamic.FormDynamicPage , icon: 'checkbox' }  
+      { title: 'QrCode', component: qrcode.QrCodePage, icon: 'qr-scanner' },
+      { title: 'Web', component: appBrowser.AppBrowserPage, icon: 'send' },
+      { title: 'Email', component: email.EmailPage, icon: 'mail' },
+      { title: 'Carte', component: maps.MapsPage, icon: 'locate' },
+      { title: 'Formulaires', component: forms.ComplexFormsPage, icon: 'checkbox' },
+      { title: 'Form Dynamic', component: formDynamic.FormDynamicPage, icon: 'checkbox' }
     ];
   }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      StatusBar.styleDefault();
-    });
+  MFPInit() {
+    this.rootPage = HomePage;
   }
-
+  initializeApp() { }
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
