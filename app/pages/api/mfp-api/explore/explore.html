@@ -12,33 +12,54 @@
   <ion-slides pager>
     <ion-slide style="background-color: lightgreen">
       <ion-toolbar>
+        URL Server
         <ion-buttons end>
-          <button (click)="next()">Rss</button>
+          <button clear (click)="getSrvUrl()">Obtenir</button>
+          <button clear (click)="next()">Rss</button>
         </ion-buttons>
       </ion-toolbar>
-      <h2 class="slide-title">URL Server</h2>
-      <button clear (click)="getSrvUrl()">Obtenir</button>
+      
+      
       <p>{{infoSrv}}</p>
     </ion-slide>
+
     <ion-slide>
       <ion-toolbar>
+        Adapter RSS
         <ion-buttons end>
-          <button (click)="next()">Slide3</button>
+          <button clear (click)="getAdapt()">Lire</button>
+          <button clear (click)="next()">Slide3</button>
         </ion-buttons>
       </ion-toolbar>
-      <h2 class="slide-title">Adapter RSS</h2>
-      <button clear (click)="getAdapt()">Lire RSS</button>
+
       <div *ngIf="dataRss">
-        <p>le {{dataRss.rss.channel.pubDate}}</p>
-        <ion-list>
-          <ion-item *ngFor="info of items">
-            <ion-avatar item-left>
-              <img [src]="info.enclosure.url">
-            </ion-avatar>
+        <p>le {{pubDate}}</p>
+        <ion-card *ngFor="#info of items">
+          <ion-img [src]="info.enclosure.url"></ion-img>
+          <ion-card-content>
             <h2>{{info.title}}</h2>
-            <p>{{info.description</p>
-          </ion-item>
-        </ion-list>
+            <p>{{info.description}}</p>
+          </ion-card-content>
+          <ion-row>
+            <ion-col>
+              <button primary clear small>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>Likes</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button primary clear small>
+                <ion-icon name="text"></ion-icon>
+                <div>Comments</div>
+              </button>
+            </ion-col>
+            <ion-col center text-center>
+              <ion-note>
+                11h ago
+              </ion-note>
+            </ion-col>
+          </ion-row>
+        </ion-card>
       </div>
     </ion-slide>
 
@@ -47,7 +68,6 @@
       </ion-toolbar>
       <h2 class="slide-title">Slide 3</h2>
     </ion-slide>
-
   </ion-slides>
   <p>{{errorMsg}}</p>
 </ion-content>

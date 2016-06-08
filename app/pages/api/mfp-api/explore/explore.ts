@@ -19,6 +19,7 @@ export class ExplorePage {
   infoSrv: any;
   dataRss: any;
   items:any;
+  pubDate:any;
   slideOptions:any;
   display:DisplayTools;
   constructor(public nav: NavController,display:DisplayTools) {
@@ -26,6 +27,7 @@ export class ExplorePage {
     this.infoSrv = "";
     this.dataRss = null;
     this.items = null;
+    this.pubDate=null;
     this.errorMsg = "";
     this.slideOptions = {
       initialSlide: 1,
@@ -51,9 +53,10 @@ export class ExplorePage {
     let request = new WLResourceRequest("adapters/rss/getFeed", WLResourceRequest.GET);
     request.send().then(
       function (response) {
-        me.dataRss = response;
-        me.items=response.rss.chanel.item
-        console.log("MFP => RSS return",response);
+        console.log("MFP => RSS return",JSON.stringify(response));
+        me.dataRss = response.responseJSON;
+        me.pubDate = response.responseJSON.rss.channel.pubDate;
+        me.items=response.responseJSON.rss.channel.item;
       },
       function (error) {
         alert("failure: "+JSON.stringify(error));

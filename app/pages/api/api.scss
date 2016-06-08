@@ -14,3 +14,8 @@
     position:fixed;
     bottom: 50px;
 }
+.swiper-slide {
+    overflow-y: scroll;
+    display: block;
+    max-height: 92%;
+}
