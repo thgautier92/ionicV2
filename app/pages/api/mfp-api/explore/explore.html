@@ -9,5 +9,45 @@
 </ion-navbar>
 
 <ion-content padding class="explore">
-  <button clear (click)="getToken()">Test server</button>
+  <ion-slides pager>
+    <ion-slide style="background-color: lightgreen">
+      <ion-toolbar>
+        <ion-buttons end>
+          <button (click)="next()">Rss</button>
+        </ion-buttons>
+      </ion-toolbar>
+      <h2 class="slide-title">URL Server</h2>
+      <button clear (click)="getSrvUrl()">Obtenir</button>
+      <p>{{infoSrv}}</p>
+    </ion-slide>
+    <ion-slide>
+      <ion-toolbar>
+        <ion-buttons end>
+          <button (click)="next()">Slide3</button>
+        </ion-buttons>
+      </ion-toolbar>
+      <h2 class="slide-title">Adapter RSS</h2>
+      <button clear (click)="getAdapt()">Lire RSS</button>
+      <div *ngIf="dataRss">
+        <p>le {{dataRss.rss.channel.pubDate}}</p>
+        <ion-list>
+          <ion-item *ngFor="info of items">
+            <ion-avatar item-left>
+              <img [src]="info.enclosure.url">
+            </ion-avatar>
+            <h2>{{info.title}}</h2>
+            <p>{{info.description</p>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-slide>
+
+    <ion-slide style="background-color: red">
+      <ion-toolbar>
+      </ion-toolbar>
+      <h2 class="slide-title">Slide 3</h2>
+    </ion-slide>
+
+  </ion-slides>
+  <p>{{errorMsg}}</p>
 </ion-content>

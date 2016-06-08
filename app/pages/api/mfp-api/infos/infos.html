@@ -5,9 +5,10 @@
   Ionic pages and navigation.
 -->
 <ion-navbar *navbar>
-  <ion-title>Infos</ion-title>
+  <ion-title>Infos Serveur</ion-title>
 </ion-navbar>
 
 <ion-content padding class="infos">
-  
+  <button clear (click)="getToken()">Tester</button>
+  <p class="xsmall">{{infoSrv}}</p>
 </ion-content>
