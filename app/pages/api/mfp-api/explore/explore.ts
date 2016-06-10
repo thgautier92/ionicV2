@@ -18,7 +18,7 @@ export class ExplorePage {
   errorMsg: any;
   infoSrv: any;
   dataRss: any;
-  items:any;
+  itemsRss:any;
   pubDate:any;
   slideOptions:any;
   display:DisplayTools;
@@ -26,7 +26,7 @@ export class ExplorePage {
     this.display = display;
     this.infoSrv = "";
     this.dataRss = null;
-    this.items = null;
+    this.itemsRss = null;
     this.pubDate=null;
     this.errorMsg = "";
     this.slideOptions = {
@@ -56,14 +56,34 @@ export class ExplorePage {
         console.log("MFP => RSS return",JSON.stringify(response));
         me.dataRss = response.responseJSON;
         me.pubDate = response.responseJSON.rss.channel.pubDate;
-        me.items=response.responseJSON.rss.channel.item;
+        me.itemsRss=response.responseJSON.rss.channel.item;
       },
       function (error) {
         alert("failure: "+JSON.stringify(error));
         me.errorMsg = JSON.stringify(error);
       }
     );
-
+  }
+  getSql() {
+    this.display.displayLoading("Lecture Sql",1);
+    let me = this;
+    let request = new WLResourceRequest("adapters/apiSql/getAll", WLResourceRequest.GET);
+    request.setQueryParameter("params", "['vie_app', 10]");
+    request.send().then(
+      function (response) {
+        console.log("MFP => SQL return",JSON.stringify(response));
+      },
+      function (error) {
+        alert("failure: "+JSON.stringify(error));
+        me.errorMsg = JSON.stringify(error);
+      }
+    );
+  }
+  // Open the rss Link
+  openLink(info){
+      console.log("MFP => rss item",JSON.stringify(info));
+      let url=info.link;
+      window.open(url, '_system');
   }
 }
 

@@ -18,11 +18,8 @@
           <button clear (click)="next()">Rss</button>
         </ion-buttons>
       </ion-toolbar>
-      
-      
       <p>{{infoSrv}}</p>
     </ion-slide>
-
     <ion-slide>
       <ion-toolbar>
         Adapter RSS
@@ -34,7 +31,7 @@
 
       <div *ngIf="dataRss">
         <p>le {{pubDate}}</p>
-        <ion-card *ngFor="#info of items">
+        <ion-card *ngFor="#info of itemsRss">
           <ion-img [src]="info.enclosure.url"></ion-img>
           <ion-card-content>
             <h2>{{info.title}}</h2>
@@ -48,14 +45,14 @@
               </button>
             </ion-col>
             <ion-col>
-              <button primary clear small>
+              <button primary clear small (click)="openLink(info)">
                 <ion-icon name="text"></ion-icon>
-                <div>Comments</div>
+                <div>Article</div>
               </button>
             </ion-col>
             <ion-col center text-center>
               <ion-note>
-                11h ago
+                {{info.pubDate}}
               </ion-note>
             </ion-col>
           </ion-row>
@@ -65,8 +62,9 @@
 
     <ion-slide style="background-color: red">
       <ion-toolbar>
+        <button clear (click)="getSql()">Lire</button>
       </ion-toolbar>
-      <h2 class="slide-title">Slide 3</h2>
+      <h2 class="slide-title">Lecture SQL</h2>
     </ion-slide>
   </ion-slides>
   <p>{{errorMsg}}</p>
