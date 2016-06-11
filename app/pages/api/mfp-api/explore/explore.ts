@@ -1,4 +1,4 @@
-import {Page, NavController,Slides} from 'ionic-angular';
+import {Page, Platform, NavController,Slides} from 'ionic-angular';
 import {DisplayTools} from '../../../comon/display';
 
 declare var WL: any;
@@ -22,7 +22,9 @@ export class ExplorePage {
   pubDate:any;
   slideOptions:any;
   display:DisplayTools;
-  constructor(public nav: NavController,display:DisplayTools) {
+  platform:any;
+  constructor(public nav: NavController,display:DisplayTools, plateform:Platform) {
+    this.platform = plateform;
     this.display = display;
     this.infoSrv = "";
     this.dataRss = null;
@@ -63,7 +65,7 @@ export class ExplorePage {
         me.errorMsg = JSON.stringify(error);
       }
     );
-  }
+  };
   getSql() {
     this.display.displayLoading("Lecture Sql",1);
     let me = this;
@@ -78,12 +80,12 @@ export class ExplorePage {
         me.errorMsg = JSON.stringify(error);
       }
     );
-  }
+  };
   // Open the rss Link
   openLink(info){
-      console.log("MFP => rss item",JSON.stringify(info));
-      let url=info.link;
-      window.open(url, '_system');
-  }
+    this.platform.ready().then(() => {
+        window.open(info.link, "_system", "location=true");
+    });
+  };
 }
 

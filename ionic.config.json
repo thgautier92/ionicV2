@@ -2,5 +2,22 @@
   "name": "ionicV2",
   "app_id": "",
   "v2": true,
-  "typescript": true
+  "typescript": true,
+  "proxies": [
+    {
+      "path": "/gnews",
+      "proxyUrl": "http://news.google.fr/"
+    },{
+      "path": "/gapi",
+      "proxyUrl": "http://ajax.googleapis.com"
+    },
+    {
+      "path": "/ibm",
+      "proxyUrl": "http://gautiersa.fr:8080"
+    },
+    {
+      "path": "/couchDb",
+      "proxyUrl": "http://tgautier:Tga051163@gautiersa.fr:81"
+    }
+  ]
 }

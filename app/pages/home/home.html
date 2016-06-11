@@ -1,4 +1,3 @@
-
 <ion-navbar *navbar>
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
@@ -8,25 +7,21 @@
 
 
 <ion-content padding class="getting-started">
-
   <h3>Bienvenue dans l'application de démonstration des capacités de IONIC V2</h3>
-
   <p>
-    Cette application vous présente toutes les fonctions présentes dans IONIC V2 et les outils CORDOVA.
-    Elle sert dans le cycle de <b>Recherche et Developpement du Groupe SMA</b> à evaluer les outils et leurs intégrations en situation d'ultra Mobilité
+    Cette application vous présente toutes les fonctions présentes dans IONIC V2 et les outils CORDOVA. Elle sert dans le cycle
+    de <b>Recherche et Developpement du Groupe SMA</b> à evaluer les outils et leurs intégrations en situation d'ultra
+    Mobilité
   </p>
   <p>
     <button primary menuToggle>Activer le Menu</button>
   </p>
   <ion-list>
     <button ion-item *ngFor="#item of items" (click)="openLink(item)">
-      <ion-avatar item-left>
-        <img src="img/{{item.icon}}">
-      </ion-avatar>
-      {{ item.title }}, version {{item.version}}
+      <ion-avatar item-left><img src="img/{{item.icon}}"></ion-avatar>
+      {{item.title}}, version {{item.version}}  
       <p>{{item.description}}</p>
     </button>
   </ion-list>
-  
-
+  <feeds></feeds>
 </ion-content>

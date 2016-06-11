@@ -1,0 +1,16 @@
+<!--
+  Generated template for the Feeds component.
+
+  See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+<ion-content>
+  <button primary (click)="refreshFeed()">Feeds actualiser...</button>
+  {{text}}
+  <ion-list>
+    <ion-item *ngFor="#post of posts">
+      <h4>{{post.title}}</h4>
+      <div [innerHTML]="post.content"></div>
+    </ion-item>
+  </ion-list>
+</ion-content>
