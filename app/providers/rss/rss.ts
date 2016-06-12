@@ -3,8 +3,6 @@ import {Http} from 'angular2/http';
 import 'rxjs/add/operator/map';
 
 declare var X2JS: any;
-
-
 /*
   Generated class for the Rss provider.
 

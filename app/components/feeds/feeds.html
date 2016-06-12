@@ -5,22 +5,50 @@
   for more info on Angular 2 Components.
 -->
 <ion-content>
-  <button primary (click)="refreshFeed()">Actualiser les news...</button>
-  <button primary (click)="getFeed()">Lire...</button>
   {{text}}
-  <ion-list>
-    <ion-item *ngFor="#post of posts">
-      <h4>{{post.title}}</h4>
-      <div [innerHTML]="post.content"></div>
-    </ion-item>
-  </ion-list>
-  <ion-list *ngIf="feeds">
-    <ion-item *ngFor="#feed of feeds">
-      <ion-avatar item-left>
-        <img [src]="feed.enclosure._url">
-      </ion-avatar>
-      <h3>{{feed.title}}</h3>
-      <p>{{feed.description}}</p>
-    </ion-item>
-  </ion-list>
+  <ion-slides pager>
+    <ion-slide>
+      <button primary (click)="refreshFeed()">Actualiser les news...</button>
+      <ion-list>
+        <ion-item *ngFor="#post of posts">
+          <h4>{{post.title}}</h4>
+          <div [innerHTML]="post.content"></div>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <button primary (click)="getFeed()">Lire...</button>
+      <div *ngIf="feeds">
+        <ion-card *ngFor="#feed of feeds">
+          <ion-img [src]="feed.enclosure._url"></ion-img>
+          <ion-card-content>
+            <h2>{{feed.title}}</h2>
+            <p>{{feed.description}}</p>
+          </ion-card-content>
+          <ion-row>
+            <ion-col>
+              <button primary clear small>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>Likes</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button primary clear small (click)="openLink(info)">
+                <ion-icon name="link"></ion-icon>
+                <div>Article</div>
+              </button>
+            </ion-col>
+            <ion-col center text-center>
+              <ion-note class="small">
+                {{feed.pubDate}}
+              </ion-note>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <h2>Slide 3</h2>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
