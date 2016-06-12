@@ -16,16 +16,28 @@ export class Feeds {
   news:Rss;
   text:any;
   posts:any;
+  feeds:any;
   constructor(news:Rss) {
     this.news=news;    
   }
   refreshFeed(){
+    console.log("Feed info => read");
     this.news.load().then((result) => {
       //console.log(result);
-      this.posts=result.responseData.feed.entries;
+      this.posts=result['responseData']['feed']['entries'];
       this.text = '';
     },(error) => {
-      console.log(error);
+      console.log("Feed Error =>",JSON.stringify(error));
+      this.text = 'No News';
+    });
+  }
+  getFeed(){
+    console.log("Feed info => read");
+    this.news.readSource().then((result) => {
+      //console.log(result);
+      this.feeds=result['rss']['channel']['item'];
+    },(error) => {
+      console.log("Feed Error =>",JSON.stringify(error));
       this.text = 'No News';
     });
   }
