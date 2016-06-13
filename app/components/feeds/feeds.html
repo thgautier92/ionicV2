@@ -4,26 +4,35 @@
   See https://angular.io/docs/ts/latest/api/core/ComponentMetadata-class.html
   for more info on Angular 2 Components.
 -->
-<ion-content>
+<ion-content no-padding>
   {{text}}
   <ion-slides pager>
     <ion-slide>
       <button primary (click)="refreshFeed()">Actualiser les news...</button>
       <ion-list>
-        <ion-item *ngFor="#post of posts">
+        <ion-item text-wrap *ngFor="#post of posts">
           <h4>{{post.title}}</h4>
           <div [innerHTML]="post.content"></div>
         </ion-item>
       </ion-list>
     </ion-slide>
     <ion-slide>
-      <button primary (click)="getFeed()">Lire...</button>
+      <ion-list>
+        <ion-item>
+          <button outline item-right (click)="getFeed()">Lire...</button>
+          <!-- <ion-label>Actus</ion-label> -->
+          <ion-select [(ngModel)]="search.selectedFeed" submitText="Choisir" cancelText="Annuler" style="max-width:80%">
+            <ion-option value="">== Choisir un fil ==</ion-option>
+            <ion-option *ngFor="#opt of lstFeeds" [value]="opt.url">{{opt.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
       <div *ngIf="feeds">
         <ion-card *ngFor="#feed of feeds">
           <ion-img [src]="feed.enclosure._url"></ion-img>
           <ion-card-content>
             <h2>{{feed.title}}</h2>
-            <p>{{feed.description}}</p>
+            <div [innerHTML]="feed.description"></div>
           </ion-card-content>
           <ion-row>
             <ion-col>
@@ -33,7 +42,7 @@
               </button>
             </ion-col>
             <ion-col>
-              <button primary clear small (click)="openLink(info)">
+              <button primary clear small (click)="openLink(feed)">
                 <ion-icon name="link"></ion-icon>
                 <div>Article</div>
               </button>

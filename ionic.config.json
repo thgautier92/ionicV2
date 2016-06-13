@@ -7,9 +7,14 @@
     {
       "path": "/gnews",
       "proxyUrl": "http://news.google.fr/"
-    },{
+    },
+    {
       "path": "/gapi",
       "proxyUrl": "http://ajax.googleapis.com"
+    },
+    {
+      "path": "/lemonde",
+      "proxyUrl": "http://www.lemonde.fr"
     },
     {
       "path": "/ibm",

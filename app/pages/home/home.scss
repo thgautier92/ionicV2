@@ -1,10 +1,13 @@
 .getting-started {
 
-  p {
-    margin: 2px 0;
-    line-height: 10px;
-    font-size: 10px;
-    word-wrap: normal;
+  .intro {
+    margin: 5px 0;
+    line-height: 16px;
+    font-size: 16px;
   }
-
+  .news {
+    border: 2px solid rgba(0, 83, 187, 0.4);
+    background-color: #fff;
+    height: 600px;
+  }
 }

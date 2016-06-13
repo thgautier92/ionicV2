@@ -15,22 +15,25 @@ export class Rss {
   data: any = null;
   url: any = "";
   srvApi:any = "http://ajax.googleapis.com"; 
-  api:any= "/ajax/services/feed/load?v=1.0&num=8&q=";
-  feed: any = "https://news.google.fr/news?output=rss&num=20";
+  gApi:any= "/ajax/services/feed/load?v=1.0&num=8&q=";
+  feed: any = "https://news.google.fr/news?output=rss&num=8";
   constructor(public http: Http) {
     this.x2js = new X2JS();
-    this.url=this.srvApi+this.api+this.feed;
-    if (!window['device']){
-        console.log("Proxy CORS added for Web application");
-        this.url="/gapi"+this.api+this.feed;    
-    }
   }
 
-  load() {
+  load(search?) {
     return new Promise(resolve => {
       // We're using Angular Http provider to request the data,
       // then on the response it'll map the JSON data to a parsed JS object.
       // Next we process the data and resolve the promise with the new data.
+      if (search) {
+        this.feed = search;
+      }
+      this.url=this.srvApi+this.gApi+this.feed;
+      if (!window['device']){
+        console.log("Proxy CORS added for Web application");
+        this.url="/gapi"+this.gApi+this.feed;    
+      }
       this.http.get(this.url)
         .map(res => res.json())
         .subscribe(data => {
@@ -39,7 +42,7 @@ export class Rss {
         });
     });
   };
-  getFeeds(search?) {
+  searchFeeds(search?) {
     return new Promise(resolve => {
       if (!search) {
         search="le monde";
@@ -56,7 +59,11 @@ export class Rss {
   readSource(search?) {
     return new Promise(resolve => {
       if (!search) {
-        search="http://www.lemonde.fr/rss/une.xml";
+        if (!window['device']){
+          search="/lemonde/rss/une.xml";    
+        } else {
+          search="http://www.lemonde.fr/rss/une.xml";
+        }
       }
       this.http.get(search)
         .map(res => res)
