@@ -18,6 +18,7 @@ export class ExplorePage {
   errorMsg: any;
   infoSrv: any;
   dataRss: any;
+  dataSql:any;
   itemsRss:any;
   pubDate:any;
   slideOptions:any;
@@ -27,6 +28,7 @@ export class ExplorePage {
     this.platform = plateform;
     this.display = display;
     this.infoSrv = "";
+    this.dataSql = null;
     this.dataRss = null;
     this.itemsRss = null;
     this.pubDate=null;
@@ -70,10 +72,11 @@ export class ExplorePage {
     this.display.displayLoading("Lecture Sql",1);
     let me = this;
     let request = new WLResourceRequest("adapters/apiSql/getAll", WLResourceRequest.GET);
-    request.setQueryParameter("params", "['vie_app', 10]");
+    request.setQueryParameter("params", "['clients', 10]");
     request.send().then(
       function (response) {
         console.log("MFP => SQL return",JSON.stringify(response));
+        me.dataSql=response.responseJSON.resultSet;
       },
       function (error) {
         alert("failure: "+JSON.stringify(error));

@@ -14,8 +14,8 @@
       <ion-toolbar>
         URL Server
         <ion-buttons end>
-          <button clear (click)="getSrvUrl()">Obtenir</button>
-          <button clear (click)="next()">Rss</button>
+          <button outline (click)="getSrvUrl()">Obtenir</button>
+          <button outline (click)="next()">Suiv.</button>
         </ion-buttons>
       </ion-toolbar>
       <p>{{infoSrv}}</p>
@@ -24,8 +24,8 @@
       <ion-toolbar>
         Adapter RSS
         <ion-buttons end>
-          <button clear (click)="getAdapt()">Lire</button>
-          <button clear (click)="next()">Slide3</button>
+          <button outline (click)="getAdapt()">Lire</button>
+          <button outline (click)="next()">Suiv.</button>
         </ion-buttons>
       </ion-toolbar>
 
@@ -62,9 +62,14 @@
 
     <ion-slide style="background-color: red">
       <ion-toolbar>
-        <button clear (click)="getSql()">Lire</button>
+        Lecture SQL
+        <button outline (click)="getSql()">Lire</button>
       </ion-toolbar>
-      <h2 class="slide-title">Lecture SQL</h2>
+      <ion-list>
+          <ion-item text-wrap *ngFor="#sql of dataSql">
+            <p>{{sql | json}}</p>
+          </ion-item>
+      </ion-list>
     </ion-slide>
   </ion-slides>
   <p>{{errorMsg}}</p>
