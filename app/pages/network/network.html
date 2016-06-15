@@ -28,5 +28,12 @@
                 <ion-note item-right>{{item.value}}</ion-note>
             </ion-item>
         </ion-item-group>
+        <ion-item-group *ngIf="simInfo">
+            <ion-item-divider light>Information sur la carte SIM</ion-item-divider>
+            <ion-item class="item" *ngFor='#item of simInfo | objToArray'>
+                <h3>{{item.key}}</h3>
+                <ion-note item-right>{{item.value}}</ion-note>
+            </ion-item>
+        </ion-item-group>
     </ion-list>
 </ion-content>

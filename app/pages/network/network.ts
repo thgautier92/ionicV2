@@ -12,12 +12,14 @@ export class networkPage {
     platform:any;
     onDevice:Boolean;
     deviceInfo:any;
+    simInfo:any;
     netInfo:any;
     states:any;
   constructor(platform: Platform) {
     this.platform = platform;  
     this.netInfo={};
     this.deviceInfo={};
+    this.simInfo=null;
     this.states = [];
     this.states[Connection.UNKNOWN]  = 'Unknown connection';
     this.states[Connection.ETHERNET] = 'Ethernet connection';
@@ -31,7 +33,7 @@ export class networkPage {
     this.platform.ready().then((readySource) => {
       this.onDevice = this.platform.is('ios') || this.platform.is('android') || this.platform.is('windows');
       this.deviceInfo = Device.device;
-      console.log(this.deviceInfo);
+      //console.log(this.deviceInfo);
       this.checkNetwork();
     });
 
@@ -46,17 +48,26 @@ export class networkPage {
     });
   }
   checkNetwork() {
+    let me=this;
     this.platform.ready().then((readySource) => {
         //console.log(navigator,readySource);
         if (this.onDevice) {
           this.netInfo.type = Network.connection;
           this.netInfo.isOffline=false;
           this.netInfo.isOnline=true;
+          // Get Sim Info plugin
+          window.plugins.sim.getSimInfo(function(result){
+            //console.log("SIM info : ",JSON.stringify(result));
+            me.simInfo=result;
+          }, function(error){
+            console.log("ERROR SIM",JSON.stringify(error));
+            me.simInfo=null;
+          });
         } else {
             this.netInfo.type="Inconnu";
             this.netInfo.isOffline=!navigator.onLine;
             this.netInfo.isOnline=navigator.onLine;
         }
     });
-  }  
+  };  
 }

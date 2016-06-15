@@ -48,7 +48,8 @@
     "ionic-plugin-keyboard@~2.0.1",
     "cordova-sms-plugin",
     "cordova-plugin-image-picker",
-    "cordova-plugin-mfp"
+    "cordova-plugin-mfp",
+    "cordova-plugin-sim"
   ],
   "cordovaPlatforms": [
     "ios"
