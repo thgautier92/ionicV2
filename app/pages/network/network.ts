@@ -56,7 +56,7 @@ export class networkPage {
           this.netInfo.isOffline=false;
           this.netInfo.isOnline=true;
           // Get Sim Info plugin
-          window.plugins.sim.getSimInfo(function(result){
+          (<any>window).plugins.sim.getSimInfo(function(result){
             //console.log("SIM info : ",JSON.stringify(result));
             me.simInfo=result;
           }, function(error){

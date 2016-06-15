@@ -13,6 +13,7 @@ import {IONIC_DIRECTIVES} from 'ionic-angular';
   directives: [IONIC_DIRECTIVES]
 })
 export class Map {
+  text:any;
   constructor() {
     this.text = 'Hello World';
   }

@@ -32,7 +32,6 @@
     "cordova-plugin-actionsheet",
     "cordova-plugin-device-orientation",
     "uk.co.workingedge.phonegap.plugin.launchnavigator",
-    "cordova-plugin-email-composer",
     "cordova-plugin-inappbrowser",
     "cordova-plugin-geolocation",
     "cordova-plugin-network-information",
@@ -49,7 +48,8 @@
     "cordova-sms-plugin",
     "cordova-plugin-image-picker",
     "cordova-plugin-mfp",
-    "cordova-plugin-sim"
+    "cordova-plugin-sim",
+    "cordova-plugin-email-composer"
   ],
   "cordovaPlatforms": [
     "ios"
