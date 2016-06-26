@@ -25,7 +25,7 @@ export class MotionPage {
         this.pluginOk = true;
       }
       , error => {
-        this.display.displayToast(error);
+        this.display.displayAlert("Capteur indisponible : "+JSON.stringify(error));
         this.pluginOk = false;
       }
     );

@@ -37,7 +37,8 @@ export class geolocationPage {
       loading.dismiss();
     }, error => {
       this.pluginOk=false;
-      this.display.displayToast(error);
+      this.display.displayAlert("Geolocalisation indisponible : "+JSON.stringify(error));
+      loading.dismiss();
     });
   }
   startWatch() {
@@ -56,7 +57,7 @@ export class geolocationPage {
     let position=[geo.coords.latitude,geo.coords.longitude];
     LaunchNavigator.navigate(position).then(
     success => console.log("Launched navigator"),
-    error => console.log("Error launching navigator", error)
+    error => this.display.displayAlert("Error launching navigator : "+JSON.stringify(error))
   );
   }
 }

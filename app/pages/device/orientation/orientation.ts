@@ -32,9 +32,10 @@ export class orientationPage {
         loading.dismiss();
       },
       error => {
-        console.log(error);
         this.pluginOk = false;
-        this.display.displayToast(error);
+        //loading.dismiss();
+        this.display.displayAlert("Capteur indisponible : "+JSON.stringify(error));
+        
       }
     );
   }
