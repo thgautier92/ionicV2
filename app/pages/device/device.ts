@@ -17,11 +17,11 @@ export class DevicePage {
     this.nav = nav;
     this.display = display;
     this.items = [
-      { 'title': 'Mouvements', 'icon': 'move', 'description': "Mesure des mouvements", 'link': MotionPage, 'color': this.display.getRandomColor() },
-      { 'title': 'Boussole', 'icon': 'compass', 'description': "Détection de l'orientation", 'link': orientationPage, 'color': this.display.getRandomColor() },
-      { 'title': 'Position', 'icon': 'locate', 'description': 'Géolocalisation', 'link': geolocationPage, 'color': this.display.getRandomColor() },
-      { 'title': 'SMS', 'icon': 'send', 'description': 'Envoi de SMS', 'link': smsPage, 'color': this.display.getRandomColor() },
-      { 'title': 'Decibel', 'icon': 'microphone', 'description': 'Mesure de décibel', 'link': dbMeterPage, 'color': this.display.getRandomColor() },
+      { 'title': 'Mouvements', 'icon': 'move', 'description': "Mesure des mouvements", 'link': MotionPage,'win':false, 'color': this.display.getRandomColor() },
+      { 'title': 'Boussole', 'icon': 'compass', 'description': "Détection de l'orientation", 'link': orientationPage, 'win':false,'color': this.display.getRandomColor() },
+      { 'title': 'Position', 'icon': 'locate', 'description': 'Géolocalisation', 'link': geolocationPage,'win':true, 'color': this.display.getRandomColor() },
+      { 'title': 'SMS', 'icon': 'send', 'description': 'Envoi de SMS', 'link': smsPage, 'win':false,'color': this.display.getRandomColor() },
+      { 'title': 'Decibel', 'icon': 'microphone', 'description': 'Mesure de décibel', 'link': dbMeterPage, 'win':false,'color': this.display.getRandomColor() },
     ]
   }
   openNavDetailsPage(item) {
