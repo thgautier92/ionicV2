@@ -1,7 +1,7 @@
 import {NavController, Page} from 'ionic-angular';
 import {ExplorePage} from './explore/explore';
 import {InfosPage} from './infos/infos';
-import {NetworkPage} from './network/network';
+import {loggerPage} from './logger/logger';
 import {ParamsPage} from './params/params';
 
 
@@ -17,7 +17,7 @@ export class MfpApiPage {
     // set the root pages for each tab
     this.tab1Root = ExplorePage;
     this.tab2Root = InfosPage;
-    this.tab3Root = NetworkPage;
+    this.tab3Root = loggerPage;
     this.tab4Root = ParamsPage;
 
   }

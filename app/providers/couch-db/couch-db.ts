@@ -2,7 +2,7 @@ import {Injectable} from 'angular2/core';
 import {HTTP_PROVIDERS, Http, Request, RequestMethod, Headers} from 'angular2/http';
 import 'rxjs/add/operator/map';
 
-const defaultParams = { "srv": "gautiersa.fr:81", "user": "tgautier", "password": "Tga051163", "base": "demo" };
+const defaultParams = { "srv": "cdb.gautiersa.fr", "user": "tgautier", "password": "Tga051163", "base": "demo" };
 
 /*
   Generated class for the CouchDb provider.
