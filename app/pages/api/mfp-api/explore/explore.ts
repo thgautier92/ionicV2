@@ -57,7 +57,8 @@ export class ExplorePage {
     let request = new WLResourceRequest("adapters/rss/getFeed", WLResourceRequest.GET);
     request.send().then(
       function (response) {
-        console.log("MFP => RSS return",JSON.stringify(response));
+        console.log("MFP => RSS return");
+        console.log(response);
         me.dataRss = response.responseJSON;
         me.pubDate = response.responseJSON.rss.channel.pubDate;
         me.itemsRss=response.responseJSON.rss.channel.item;
