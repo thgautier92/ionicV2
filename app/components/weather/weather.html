@@ -1,0 +1,201 @@
+<!--
+  This compoment need those modules to be fully operational : 
+  * weather-icons
+    !! For build seeting, you must change the font path in source. Replace font by fonts
+  * intl
+-->
+<div>
+  <ion-row wrap>
+    <ion-col>
+      <ion-item>
+        <ion-label floating>Ville</ion-label>
+        <ion-input [(ngModel)]="search.city" type="search" placeholder="Ville,PAYS"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label floating>Prévisions</ion-label>
+        <ion-select [(ngModel)]="search.days" (ngModelChange)="getWeather()">
+          <ion-option *ngFor="let opt of lstOpt" [value]="opt.code">{{opt.lib}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <button type="submit" (click)="getWeather()">Actualiser {{search.city}}&nbsp;&nbsp;<i class="wi wi-cloud-refresh"></i></button>
+    </ion-col>
+  </ion-row>
+  <div [ngSwitch]="search.days" no-padding margin-top>
+    <div *ngSwitchWhen="'current'">
+      <div *ngIf="dataW">
+        <h3>Météo pour {{dataW.name}},{{dataW.sys.country}}</h3>
+        <ion-list no-lines>
+          <ion-item>
+            GPS : {{dataW.coord.lat}},{{dataW.coord.lon}}
+          </ion-item>
+          <ion-item *ngFor="let w of dataW.weather">
+            <ion-thumbnail item-left>
+              <img src="http://openweathermap.org/img/w/{{w.icon}}.png">
+            </ion-thumbnail>
+            <h1>{{dataW.main.temp}}°C</h1>
+            <h2><i class="wi wi-owm-{{w.id}}"></i> {{w.description}}</h2>
+            <h2>
+              <ion-icon name="arrow-round-down" primary></ion-icon> {{dataW.main.temp_min}}°C
+              <ion-icon name="arrow-round-up" primary></ion-icon> {{dataW.main.temp_max}}°C
+            </h2>
+            <h3><i class="wi wi-barometer" primary></i> {{dataW.main.pressure}} hPa</h3>
+            <h3>
+              <ion-icon name="cloudy" primary></ion-icon>
+              Nuages {{dataW.clouds.all}}%
+              <i class="wi wi-humidity" primary></i> {{dataW.main.humidity}}
+            </h3>
+            <h3 *ngIf="dataW['rain']">
+              <ion-icon name="rainy" primary></ion-icon>
+              Pluie : {{dataW.rain["3h"]}}mm
+            </h3>
+            <h3><i class="wi wi-wind-direction" primary></i> {{dataW.wind.speed}}Km/h, orienté à {{dataW.wind.deg}}°</h3>
+            <h3><i class="wi wi-sunrise" secondary></i> {{dataW.sys.sunrise*1000 | date:"HHmm"}}, <i class="wi wi-sunset" secondary></i>              {{dataW.sys.sunset*1000 | date:"HHmm"}}</h3>
+            <item-note>{{dataW.dt*1000 | date:"ddddMMMHHmm"}}</item-note>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+    <div *ngSwitchWhen="'city'">
+      <div *ngIf="dataW">
+        <ion-list no-lines *ngFor="let city of dataW.list">
+          <ion-item>
+            <h1 primary>Météo pour {{city.name}},{{city.sys.country}}</h1>
+            <p>GPS : {{city.coord.lat}},{{city.coord.lon}}</p>
+          </ion-item>
+          <ion-item *ngFor="let w of city.weather">
+            <ion-thumbnail item-left>
+              <img src="http://openweathermap.org/img/w/{{w.icon}}.png">
+            </ion-thumbnail>
+            <h1>{{city.main.temp}}°C</h1>
+            <h2><i class="wi wi-owm-{{w.id}}"></i> {{w.description}}</h2>
+            <h2>
+              <ion-icon name="arrow-round-down" primary></ion-icon> {{city.main.temp_min}}°C
+              <ion-icon name="arrow-round-up" primary></ion-icon> {{city.main.temp_max}}°C
+            </h2>
+            <h3><i class="wi wi-barometer" primary></i> {{city.main.pressure}} hPa</h3>
+            <h3>
+              <ion-icon name="cloudy" primary></ion-icon>
+              Nuages {{city.clouds.all}}%
+              <i class="wi wi-humidity" primary></i> {{city.main.humidity}}
+            </h3>
+            <h3 *ngIf="city['rain']">
+              <ion-icon name="rainy" primary></ion-icon>
+              Pluie : {{city.rain["3h"]}}mm
+            </h3>
+            <h3><i class="wi wi-wind-direction" primary></i> {{city.wind.speed}}Km/h, orienté à {{city.wind.deg}}°</h3>
+            <item-note>{{city.dt*1000 | date:"ddddMMMHHmm"}}</item-note>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+    <div *ngSwitchWhen="'5days'">
+      <div *ngIf="dataW">
+        <h3>Météo à 5 jours/3 heures pour {{dataW.city.name}},{{dataW.city.country}}</h3>
+        <ion-card *ngFor="let item of dataW.list" padding>
+          <ion-slides>
+            <ion-slide>
+              <h2 text-left>{{item.weather[0].description}}</h2>
+              <ion-list no-lines no-padding>
+                <ion-item no-padding>
+                  <ion-thumbnail item-left>
+                    <img src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png">
+                  </ion-thumbnail>
+                  <h2>
+                    <ion-icon name="arrow-round-down" primary></ion-icon> {{item.main.temp_min}}°C
+                    <br>
+                    <ion-icon name="arrow-round-up" primary></ion-icon> {{item.main.temp_max}}°C
+                  </h2>
+                  <ion-note item-right style="font-size: 1.5rem" primary>
+                    {{item.dt*1000 | date:"EEEE"}}
+                    <br>{{item.dt*1000 | date:"MMMdddd"}}
+                    <br>{{item.dt*1000 | date:"HHmm"}}
+                  </ion-note>
+                </ion-item>
+              </ion-list>
+            </ion-slide>
+            <ion-slide *ngIf="item['rain']">
+              <ion-item>
+                <ion-icon name="rainy" item-left></ion-icon>
+                Pluie : {{item.rain["3h"]}}mm
+              </ion-item>
+            </ion-slide>
+            <ion-slide>
+              <ion-item>
+                <ion-icon name="cloudy" item-left></ion-icon>
+                Nuages {{item.clouds.all}}%
+                <br><i class="wi wi-humidity"></i> {{item.main.humidity}}%
+              </ion-item>
+            </ion-slide>
+            <ion-slide>
+              <ion-item>
+                <ion-icon name="compass" item-left></ion-icon>
+                Pression {{item.main.pressure}} hPa
+                <br>Terrestre {{item.main.grnd_level}} hPa
+                <br>Maritime {{item.main.sea_level}} hPa
+                <br>Vent à {{item.wind.speed}} km/h<br>orienté à {{item.wind.deg}}°
+              </ion-item>
+            </ion-slide>
+          </ion-slides>
+        </ion-card>
+      </div>
+    </div>
+    <div *ngSwitchWhen="'16days'">
+      <div *ngIf="dataW">
+        <h3>Météo à 16 jours pour {{dataW.city.name}},{{dataW.city.country}}</h3>
+        <ion-card *ngFor="let item of dataW.list" padding>
+          <ion-slides>
+            <ion-slide>
+              <h2 text-left>{{item.weather[0].description}}</h2>
+              <ion-list no-lines no-padding>
+                <ion-item no-padding>
+                  <ion-thumbnail item-left>
+                    <img src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png">
+                  </ion-thumbnail>
+                  <h2>
+                    <ion-icon name="arrow-round-down" primary></ion-icon> {{item.temp.min}}°C
+                    <br>
+                    <ion-icon name="arrow-round-up" primary></ion-icon> {{item.temp.max}}°C
+                  </h2>
+                  <ion-note item-right primary>
+                    {{item.dt*1000 | date:"MMMdddd"}}
+                  </ion-note>
+                </ion-item>
+              </ion-list>
+            </ion-slide>
+            <ion-slide>
+              <ion-item>
+                <ion-icon name="thermometer" item-left></ion-icon>
+                Matin : {{item.temp.morn}}°C
+                <br>Journée : {{item.temp.day}}°C
+                <br>Soirée : {{item.temp.eve}}°C
+                <br>Nuit : {{item.temp.night}}°C
+              </ion-item>
+            </ion-slide>
+            <ion-slide>
+              <ion-item>
+                <ion-icon name="cloudy" item-left></ion-icon>
+                Nuages {{item.clouds}}%
+                <br><i class="wi wi-humidity"></i> {{item.humidity}}
+              </ion-item>
+            </ion-slide>
+            <ion-slide>
+              <ion-item>
+                <ion-icon name="compass" item-left></ion-icon>
+                Pression {{item.pressure}} hPa
+                <br>Vent à {{item.speed}}km/h<br>orienté à {{item.deg}}°
+              </ion-item>
+            </ion-slide>
+
+          </ion-slides>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+  <div *ngIf='dataMsg'>
+    <h2 danger>{{dataMsg}}</h2>
+  </div>
+</div>

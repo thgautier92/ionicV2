@@ -1,4 +1,6 @@
-import {Page, NavController} from 'ionic-angular';
+import { Component } from 'angular2/core';
+import { NavController } from 'ionic-angular';
+import {Weather} from '../../components/weather/weather';
 
 /*
   Generated class for the WeatherPage page.
@@ -6,9 +8,10 @@ import {Page, NavController} from 'ionic-angular';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-@Page({
+@Component({
   templateUrl: 'build/pages/weather/weather.html',
+   directives: [Weather],
 })
 export class WeatherPage {
-  constructor(public nav: NavController) {}
+  constructor(private nav: NavController) {}
 }

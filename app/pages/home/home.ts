@@ -12,7 +12,7 @@ export class HomePage {
   constructor(platform: Platform) {
     this.platform = platform;  
     this.items = [
-      { title: 'Ionic', version: '2.0 beta 30', icon: 'ionicV2.png', description: 'Nouvelle beta version', link: 'http://ionicframework.com/docs/v2/' },
+      { title: 'Ionic', version: '2.0 beta 37', icon: 'ionicV2.png', description: 'Nouvelle beta version', link: 'http://ionicframework.com/docs/v2/' },
       { title: 'Angular', version: '2.0', icon: 'angularV2.png', description: 'Version validée', link: 'https://angular.io/' },
       { title: 'Cordova', version: '6.2', icon: 'cordova_bot.png', description: 'Nouvelle version', link: 'https://cordova.apache.org/' }
     ]

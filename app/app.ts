@@ -15,6 +15,7 @@ import * as maps from './pages/maps/maps';
 import * as api from './pages/api/api';
 import * as forms from './pages/complex-forms/complex-forms';
 import * as formDynamic from './pages/form-dynamic/form-dynamic';
+import {WeatherPage} from './pages/weather/weather';
 
 declare var WL: any; 
 
@@ -64,6 +65,7 @@ class MyApp {
       { title: 'Web', component: appBrowser.AppBrowserPage, icon: 'send' },
       { title: 'Email', component: email.EmailPage, icon: 'mail' },
       { title: 'Carte', component: maps.MapsPage, icon: 'locate' },
+      { title: 'Météo', component: WeatherPage, icon: 'cloud' },
       { title: 'Formulaires', component: forms.ComplexFormsPage, icon: 'checkbox' },
       { title: 'Form Dynamic', component: formDynamic.FormDynamicPage, icon: 'checkbox' }
     ];
